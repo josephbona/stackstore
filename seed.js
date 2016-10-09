@@ -20,7 +20,28 @@ name in the environment files.
 var chalk = require('chalk');
 var db = require('./server/db');
 var User = db.model('user');
+var Product = require('./server/db/models/product')
 var Promise = require('sequelize').Promise;
+const Faker = require('Faker');
+
+//uses Faker module to create products for seeding. change i<NUMBER_OF_PRODUCTS for more/less 
+var seedProducts = function(){
+    var products = [];
+    
+    //create products array
+    for (var i = 0; i < 500; i++){
+        var name = Faker.commerce.productName();
+        var description = Faker.lorem.sentence() + ' ' + Faker.lorem.sentence(); 
+        products.push({ name: name, description: description });
+    }
+
+    var createProducts = products.map(function(product){
+        return Product.create(product);
+    });
+
+    return Promise.all(createProducts);
+
+};
 
 var seedUsers = function () {
 
@@ -44,8 +65,11 @@ var seedUsers = function () {
 };
 
 db.sync({ force: true })
-    .then(function () {
+    .then( function(){
         return seedUsers();
+    })
+    .then(function(){
+        return seedProducts();
     })
     .then(function () {
         console.log(chalk.green('Seed successful!'));
