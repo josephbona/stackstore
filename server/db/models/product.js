@@ -8,6 +8,9 @@ var Product = db.define ('product', {
 	},
 	description: {
 		type: Sequelize.STRING
+	},
+	image: {
+		type: Sequelize.STRING
 	}
 });
 
