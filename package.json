@@ -5,7 +5,7 @@
   "main": "server/start.js",
   "scripts": {
     "start": "nodemon --watch server -e js,html server/start.js",
-    "start:dev": "SYNC=true DATABASE_URL=postgres://localhost/fsg nodemon server/start.js",
+    "start:dev": "SYNC=true DATABASE_URL=postgres://localhost/stackstore nodemon server/start.js",
     "postinstall": "gulp build"
   },
   "engines": {

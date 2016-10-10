@@ -22,3 +22,25 @@ router.post('/', function(req, res, next){
 	.catch(next);
 });
 
+router.put('/:id', function(req, res, next){
+	Product.findById(req.params.id)
+		.then(function(product){
+			//assumes req.body name, description. get product object passed in instead? 
+			product.name = req.body.name;
+			product.description = req.body.description;
+			
+			product.save()
+				.then(function(product){
+					res.send(product);
+				});
+		}).catch(next);
+});
+
+router.delete('/:id', function(req, res, next){
+	Product.destroy({ where: { id: req.params.id } })
+		.then(function(){
+			res.sendStatus(200);
+		})
+		.catch(next);
+});
+
