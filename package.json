@@ -4,7 +4,7 @@
   "description": "A generated project at Fullstack Academy",
   "main": "server/start.js",
   "scripts": {
-    "start": "nodemon --watch server -e js,html server/start.js",
+    "start": "nodemon --watch server -e js,html --ignore browser server/start.js",
     "postinstall": "gulp build"
   },
   "engines": {
@@ -20,7 +20,6 @@
     "babel-register": "^6.6.0",
     "bluebird": "^3.3.3",
     "body-parser": "^1.12.0",
-    "bootstrap": "^3.3.4",
     "chai": "^2.1.0",
     "chalk": "^1.0.0",
     "connect-session-sequelize": "^3.0.0",

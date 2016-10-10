@@ -1,26 +1,19 @@
-* {
-  box-sizing: border-box;
-}
+@import
+  'base/reset',
+  'vendor/bootstrap',
+  'vendor/flaticon';
 
-body {
-  background: #fdfdfd;
-}
+@import
+  'utils/mixins';
 
-@mixin clearfix {
-  &:after {
-    content: "";
-    display: table;
-    clear: both;
-  }
-}
+@import
+  'base/base',
+  'base/fontstack',
+  'base/typography',
+  'base/no-gutters';
 
-#main {
-  padding-top: 60px;
-  margin: 0 auto;
-}
+@import
+  'layout/header';
 
-@import 'directives/main';
-@import 'home/main';
-@import 'about/main';
-@import 'tutorial/main';
-@import 'login/main';
+@import
+  'modules/search';
