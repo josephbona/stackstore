@@ -1,0 +1,16 @@
+body {
+	font-weight: 400;
+}
+.container-fluid {
+	max-width: 1170px;
+}
+.show-on-hover {
+	@include max-width($grid-float-breakpoint-max) {
+		&:not(.open)>.dropdown-menu, &:not(.open):hover>.dropdown-menu {
+			display: none;
+		}
+	}
+	&:hover>.dropdown-menu {
+		display: block;
+	}
+}
