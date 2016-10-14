@@ -1,7 +1,8 @@
 @import
   'base/reset',
   'vendor/bootstrap',
-  'vendor/flaticon';
+  'vendor/flaticon',
+  'vendor/font-awesome';
 
 @import
   'utils/mixins';
@@ -13,7 +14,10 @@
   'base/no-gutters';
 
 @import
-  'layout/header';
+  'layout/header',
+  'layout/breadcrumbs',
+  'layout/sidebar',
+  'layout/product-archive';
 
 @import
   'modules/search';

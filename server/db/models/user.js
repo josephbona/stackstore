@@ -6,10 +6,33 @@ var Sequelize = require('sequelize');
 var db = require('../_db');
 
 module.exports = db.define('user', {
+    name: {
+        type: Sequelize.STRING,
+        allowNull: false
+    },
     email: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull: Sequelize.STRING
     },
     password: {
+        type: Sequelize.STRING, 
+        allowNull: Sequelize.STRING
+    },
+    role: {
+        type: Sequelize.STRING
+    },
+    shipping_address: {
+        type: Sequelize.STRING
+    },
+    billing_address: {
+        type: Sequelize.STRING
+    },
+    country: {
+        type: Sequelize.STRING
+    },
+    
+    // we should limit the entries here to several states: perhaps: "Empty", "Shopping", "Checkout" and "Complete"
+    cartStatus: {
         type: Sequelize.STRING
     },
     salt: {
