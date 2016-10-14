@@ -3,13 +3,13 @@ const Product = require('../../db/models/product')
 
 module.exports = router;
 
-router.get('/', function(req, res, next){
-	Product.findAll()
-		.then(function(products){
-			res.send(products);
-		})
-		.catch(next);
-});
+// router.get('/', function(req, res, next){
+// 	Product.findAll()
+// 		.then(function(products){
+// 			res.send(products);
+// 		})
+// 		.catch(next);
+// });
 
 router.post('/', function(req, res, next){
 	Product.create({
