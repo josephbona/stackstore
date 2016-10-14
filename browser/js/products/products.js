@@ -6,6 +6,7 @@ app.config(function ($stateProvider) {
         	products: function(ProductService){
         		return ProductService.findAll();
         	}, 
+        }, 
         url: '/products',
         controller: 'ProductsController',
         templateUrl: 'js/products/products.html'
