@@ -1,9 +1,10 @@
 const router = require('express').Router();
-const User = require('../../db/models/user');
+const User = require('../../db').models.User;
 
 module.exports = router;
 
 router.get('/', function(req, res, next){
+	console.log(User);
 	User.findAll()
 		.then(function(users){
 			res.send(users);
@@ -13,6 +14,7 @@ router.get('/', function(req, res, next){
 
 router.post('/', function(req, res, next){
 	User.create({
+		name: req.body.name,
 		email: req.body.email,
 		password: req.body.password
 	})
