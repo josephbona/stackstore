@@ -6,7 +6,8 @@
   "scripts": {
     "start": "nodemon --watch server -e js,html server/start.js",
     "start:dev": "SYNC=true NODE_ENV=dev DATABASE_URL=postgres://localhost/stackstore nodemon --ignore /browser/* server/start.js --ignore /browser/*",
-    "postinstall": "gulp build"
+    "postinstall": "gulp build",
+    "seed": "SEED=true DATABASE_URL=postgres://localhost/stackstore node server/start.js "
   },
   "engines": {
     "node": ">=4.0.0"

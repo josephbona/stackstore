@@ -18,14 +18,17 @@ name in the environment files.
 */
 
 var chalk = require('chalk');
-var db = require('./server/db');
-var User = db.model('user');
-var Category = db.model('category');
-var Review = db.model('review');
-var LineItem = db.model('line_item');
+var db = require('./server/db').db;
+var models = require('./server/db').models;
+
+var User = models.User;
+var Category = models.Category;
+var Review = models.Review;
+var LineItem = models.LineItem;
 var Product = require('./server/db/models/product')
 var Promise = require('sequelize').Promise;
 const Faker = require('Faker');
+
 
 //uses Faker module to create products for seeding. change i<NUMBER_OF_PRODUCTS for more/less 
 var seedProducts = function(){
@@ -71,7 +74,6 @@ var seedUsers = function () {
     ];
 
     var creatingUsers = users.map(function (userObj) {
-        console.log('here is userObj: ', userObj)
         return User.create(userObj);
     });
 
@@ -169,6 +171,8 @@ var seedLineItems = function () {
     return Promise.all(creatingLineItems);
 };
 
+
+// var seed =    
 db.sync({ force: true })
     .then( function(){
         console.log(chalk.blue('Seed the Users'));
@@ -199,3 +203,11 @@ db.sync({ force: true })
         console.error(err);
         process.exit(1);
     });
+
+    // module.exports = seed;
+
+
+
+
+
+
