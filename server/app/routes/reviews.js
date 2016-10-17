@@ -25,8 +25,8 @@ router.post('/', function(req, res, next){
 router.put('/:id', function(req, res, next){
 	Review.findById(req.params.id)
 		.then(function(review){
-			review.rating = req.body.rating,
-			review.review = req.body.review
+			review.rating = req.body.rating;
+			review.review = req.body.review;
 			review.save()
 				.then(function(review){
 					res.send(review);

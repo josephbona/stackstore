@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const LineItem = require('../../db').models.LineItem
+const LineItem = require('../../db').models.LineItem;
 
 module.exports = router;
 
@@ -24,7 +24,7 @@ router.post('/', function(req, res, next){
 router.put('/:id', function(req, res, next){
 	LineItem.findById(req.params.id)
 		.then(function(lineItem){
-			lineItem.quantity = req.body.quantity,
+			lineItem.quantity = req.body.quantity;
 			lineItem.save()
 				.then(function(lineItem){
 					res.send(lineItem);
