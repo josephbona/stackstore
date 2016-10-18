@@ -1,7 +1,7 @@
 'use strict';
 var chalk = require('chalk');
 var db = require('./db').db;
-var seed = require('../seed');
+// var seed = require('../seed');
 
 // Create a node server instance! cOoL!
 var server = require('http').createServer();

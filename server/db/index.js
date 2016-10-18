@@ -2,8 +2,8 @@
 var db = require('./_db');
 
 var User = require('./models/user');
-var Product = require('./models/product');
 var Category = require('./models/category');
+var Product = require('./models/product');
 var LineItem = require('./models/lineItem');
 var Review = require('./models/review');
 
@@ -11,8 +11,8 @@ module.exports = {
 	db: db,
 	models: {
 		User: User,
-		Product: Product,
 		Category: Category,
+		Product: Product,
 		LineItem: LineItem,
 		Review: Review
 	}
@@ -29,8 +29,8 @@ Review.belongsTo(User);
 Product.hasMany(Review);
 // LineItem.hasOne(Product);
 
-Product.hasOne(Category);
-// Product.belongsTo(Category);
+//Product.hasOne(Category);
+ Product.belongsTo(Category);
 
 //Add this line if users can post products:
 // Product.belongsTo(User);
