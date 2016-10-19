@@ -177,33 +177,33 @@ var seedLineItems = function () {
     return Promise.all(creatingLineItems);
 };
 
-db.sync({ force: true })
-    .then( function(){
-        console.log(chalk.blue('Seed the Users'));
-        return seedUsers();
-    })
-    .then(function(){
-        console.log(chalk.blue('Seed the Products'));
-        return seedProducts();
-    })
-    .then(function(){
-        console.log(chalk.blue('Seed the Categories'));
-        return seedCategories();
-    })
-    .then(function(){
-        console.log(chalk.blue('Seed the Reviews'));
-        return seedReviews();
-    })
-    .then(function(){
-        console.log(chalk.blue('Seed the Line Items'));
-        return seedLineItems();
-    })
+// db.sync({ force: true })
+//     .then( function(){
+//         console.log(chalk.blue('Seed the Users'));
+//         return seedUsers();
+//     })
+//     .then(function(){
+//         console.log(chalk.blue('Seed the Products'));
+//         return seedProducts();
+//     })
+//     .then(function(){
+//         console.log(chalk.blue('Seed the Categories'));
+//         return seedCategories();
+//     })
+//     .then(function(){
+//         console.log(chalk.blue('Seed the Reviews'));
+//         return seedReviews();
+//     })
+//     .then(function(){
+//         console.log(chalk.blue('Seed the Line Items'));
+//         return seedLineItems();
+//     })
 
-    .then(function () {
-        console.log(chalk.green('Seed successful!'));
-        process.exit(0);
-    })
-    .catch(function (err) {
-        console.error(err);
-        process.exit(1);
-    });
+//     .then(function () {
+//         console.log(chalk.green('Seed successful!'));
+//         process.exit(0);
+//     })
+//     .catch(function (err) {
+//         console.error(err);
+//         process.exit(1);
+//     });
