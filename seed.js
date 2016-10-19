@@ -1,22 +1,3 @@
-/*
-
-This seed file is only a placeholder. It should be expanded and altered
-to fit the development of your application.
-
-It uses the same file the server uses to establish
-the database connection:
---- server/db/index.js
-
-The name of the database used is set in your environment files:
---- server/env/*
-
-This seed file has a safety check to see if you already have users
-in the database. If you are developing multiple applications with the
-fsg scaffolding, keep in mind that fsg always uses the same database
-name in the environment files.
-
-*/
-
 var chalk = require('chalk');
 var db = require('./server/db').db;
 var User = db.model('user');
@@ -37,13 +18,13 @@ var seedProducts = function(){
         var name = Faker.commerce.productName();
         var description = Faker.lorem.sentence() + ' ' + Faker.lorem.sentence();
         var price = Faker.commerce.price();
-        products.push({ name: name, description: description, image: image, price: price });
+        var categoryId = Math.ceil((Math.random()*4)); //Place product in random category 1-4
+        products.push({ name: name, description: description, image: image, price: price, categoryId: categoryId });
     }
 
     var createProducts = products.map(function(product){
         return Product.create(product);
     });
-
     return Promise.all(createProducts);
 
 };
@@ -71,7 +52,6 @@ var seedUsers = function () {
     ];
 
     var creatingUsers = users.map(function (userObj) {
-        console.log('here is userObj: ', userObj)
         return User.create(userObj);
     });
 
@@ -102,6 +82,7 @@ var seedCategories = function () {
     });
     return Promise.all(creatingCategories);
 };
+
 
 var seedReviews = function () {
 
@@ -138,6 +119,7 @@ var seedReviews = function () {
     return Promise.all(creatingReviews);
 };
 
+
 var seedLineItems = function () {
 
     var lineItems = [
@@ -169,19 +151,23 @@ var seedLineItems = function () {
     return Promise.all(creatingLineItems);
 };
 
+
+
+// var seed =
 db.sync({ force: true })
     .then( function(){
         console.log(chalk.blue('Seed the Users'));
         return seedUsers();
     })
     .then(function(){
-        console.log(chalk.blue('Seed the Products'));
-        return seedProducts();
-    })
-    .then(function(){
         console.log(chalk.blue('Seed the Categories'));
         return seedCategories();
     })
+    .then(function(){
+        console.log(chalk.blue('Seed the Products'));
+        return seedProducts();
+    })
+
     .then(function(){
         console.log(chalk.blue('Seed the Reviews'));
         return seedReviews();
@@ -190,7 +176,6 @@ db.sync({ force: true })
         console.log(chalk.blue('Seed the Line Items'));
         return seedLineItems();
     })
-
     .then(function () {
         console.log(chalk.green('Seed successful!'));
         process.exit(0);
@@ -199,3 +184,11 @@ db.sync({ force: true })
         console.error(err);
         process.exit(1);
     });
+
+    // module.exports = seed;
+
+
+
+
+
+

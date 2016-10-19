@@ -5,7 +5,7 @@ var Sequelize = require('sequelize');
 
 var db = require('../_db');
 
-module.exports = db.define('user', {
+var User = db.define('user', {
     name: {
         type: Sequelize.STRING,
         allowNull: false
@@ -79,3 +79,5 @@ function setSaltAndPassword(user) {
         user.password = user.Model.encryptPassword(user.password, user.salt);
     }
 }
+
+module.exports = User;
