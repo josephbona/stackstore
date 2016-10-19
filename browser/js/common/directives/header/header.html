@@ -3,24 +3,23 @@
         StackStore
     </a>
     <div class="header-right">
-        <div class="meta-links">
-            Free shipping on orders over $50.
-            {{currentUser}}
-            <span ng-if="!user.email"><a ui-sref="login">Sign in</a> or <a>Create an Account</a></span>
-            <span ng-if="user.email">Welcome {{user.email}}</span>
+      <div class="meta-links">
+          Free shipping on orders over $50.
+          <span ng-if="!user"><a ui-sref="login">Sign in</a> or <a>Create an Account</a></span>
+          <span ng-if="user"><a ui-sref="user">View Account</a> or <a ng-click="logout()">Logout</a></span>
+      </div>
+      <div class="header-row">
+        <div class="header-col-7">
+          <form class="search">
+            <input type="search" placeholder="Search all products...">
+            <button type="submit" class="submit">
+              <i class="icon icon-magnifying-glass"></i>
+            </button>
+          </form>
         </div>
-        <div class="header-row">
-          <div class="header-col-7">
-            <form class="search">
-              <input type="search" placeholder="Search all products...">
-              <button type="submit" class="submit">
-                <i class="icon icon-magnifying-glass"></i>
-              </button>
-            </form>
-          </div>
-          <div class="header-col-5">
-            <a ui-sref="cart" class="btn btn-cart btn-block"><i class="icon icon-shopping-cart"></i>Cart</a>
-          </div>
+        <div class="header-col-5">
+          <a ui-sref="cart" class="btn btn-cart btn-block"><i class="icon icon-shopping-cart"></i>Cart</a>
         </div>
+      </div>
     </div>
 </div>

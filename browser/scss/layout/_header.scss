@@ -19,6 +19,7 @@
     margin: 15px 0;
     @include min-width($screen-sm-min) {
       float: right;
+      min-width: 500px;
     }
     .meta-links {
       text-align: right;

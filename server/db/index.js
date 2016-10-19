@@ -30,7 +30,8 @@ Product.hasMany(Review);
 // LineItem.hasOne(Product);
 
 //Product.hasOne(Category);
- Product.belongsTo(Category);
+Product.belongsTo(Category);
+Category.hasMany(Product);
 
 //Add this line if users can post products:
 // Product.belongsTo(User);
