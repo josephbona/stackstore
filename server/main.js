@@ -39,10 +39,9 @@ if(process.env.SYNC) {
       return seed.seedLineItems();
   })
   .then(function () {
-      return console.log('Seed successful!');
+      return console.log(chalk.green('Seed successful!'));
   })
-  .then(createApplication)
-  .then(startServer)
+  .then(process.exit(0))
   .catch(function (err) {
       console.error(chalk.red(err.stack));
   });
