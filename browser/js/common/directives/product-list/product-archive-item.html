@@ -1,0 +1,23 @@
+<a ui-sref="product({{product.id}})" class="product-archive-item">
+  <div class="image">
+    <div class="image-centered">
+      <img src="{{product.image}}" alt="{{product.name}}">
+    </div>
+  </div>
+  <p class="title">{{product.name}}</p>
+  <div class="price">
+    <!-- @TODO: separate price into decimal -->
+    <span class="amount"><sup>$</sup>{{product.price}}<sup>00</sup></span>
+    <!-- <span class="label">On Sale</span> -->
+  </div>
+  <span class="reviews">
+    <span class="stars">
+      <i class="fa fa-star"></i>
+      <i class="fa fa-star"></i>
+      <i class="fa fa-star"></i>
+      <i class="fa fa-star"></i>
+      <i class="fa fa-star-half-o"></i>
+    </span>
+    <span class="number">25 Reviews</span>
+  </span>
+</a>

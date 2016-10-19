@@ -1,11 +1,13 @@
 <div class="container">
-    <a sref="home" class="logo">
+    <a ui-sref="home" class="logo">
         StackStore
     </a>
     <div class="header-right">
         <div class="meta-links">
             Free shipping on orders over $50.
-            <span><a>Sign in</a> or <a>Create an Account</a></span>
+            {{currentUser}}
+            <span ng-if="!user.email"><a ui-sref="login">Sign in</a> or <a>Create an Account</a></span>
+            <span ng-if="user.email">Welcome {{user.email}}</span>
         </div>
         <div class="header-row">
           <div class="header-col-7">
