@@ -1,4 +1,4 @@
-tconst router = require('express').Router();
+const router = require('express').Router();
 const User = require('../../db').models.User;
 
 module.exports = router;
@@ -30,7 +30,7 @@ router.put('/:id', function(req, res, next){
 			//assumes req.body has email, password etc. would be great to just get the object to save instead
 			user.email = req.body.email;
 			user.password = req.body.password;
-			
+
 			user.save()
 				.then(function(user){
 					res.send(user);
