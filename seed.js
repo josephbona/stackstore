@@ -18,7 +18,7 @@ name in the environment files.
 */
 
 var chalk = require('chalk');
-var db = require('./server/db');
+var db = require('./server/db').db;
 var User = db.model('user');
 var Category = db.model('category');
 var Review = db.model('review');
