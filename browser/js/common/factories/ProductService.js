@@ -31,10 +31,20 @@ app.factory('ProductService', function($http){
 		}, 
 
 		destroy: function(product){
-			$http.delete('/api/products/' + product.id)
+			return $http.delete('/api/products/' + product.id)
 			.then(function(){
 				angular.copy({}, _product); 
 			})
+		}, 
+
+		update: function(product){
+			return $http.put('/api/products/' + product.id)
+			.then(function(result){
+				angular.copy(result.data, _product); 
+				return product; 
+			})
 		}
+
+
 	};
 })
