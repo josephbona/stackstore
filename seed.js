@@ -25,7 +25,7 @@ var Review = db.model('review');
 var LineItem = db.model('line_item');
 var Product = require('./server/db/models/product')
 var Promise = require('sequelize').Promise;
-const Faker = require('Faker');
+const Faker = require('faker');
 
 //uses Faker module to create products for seeding. change i<NUMBER_OF_PRODUCTS for more/less
 var seedProducts = function(){
