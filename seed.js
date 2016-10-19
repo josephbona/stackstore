@@ -27,7 +27,15 @@ var Product = require('./server/db/models/product')
 var Promise = require('sequelize').Promise;
 const Faker = require('Faker');
 
-//uses Faker module to create products for seeding. change i<NUMBER_OF_PRODUCTS for more/less 
+module.exports = {
+    seedUsers: seedUsers,
+    seedProducts: seedProducts,
+    seedCategories: seedCategories,
+    seedReviews: seedReviews,
+    seedLineItems: seedLineItems
+}
+
+//uses Faker module to create products for seeding. change i<NUMBER_OF_PRODUCTS for more/less
 var seedProducts = function(){
     var products = [];
     var image = 'http://lorempixel.com/400/400/';
@@ -35,7 +43,7 @@ var seedProducts = function(){
     //create products array
     for (var i = 0; i < 25; i++){
         var name = Faker.commerce.productName();
-        var description = Faker.lorem.sentence() + ' ' + Faker.lorem.sentence(); 
+        var description = Faker.lorem.sentence() + ' ' + Faker.lorem.sentence();
         var price = Faker.commerce.price();
         products.push({ name: name, description: description, image: image, price: price });
     }
@@ -88,7 +96,7 @@ var seedCategories = function () {
         },
         {
             name: 'International Monuments'
-        }, 
+        },
         {
             name: 'Rentals'
         },
@@ -149,7 +157,7 @@ var seedLineItems = function () {
         {
             userId: 1,
             productId: 6,
-            quantity: 1,  
+            quantity: 1,
         },
           {
             userId: 2,
