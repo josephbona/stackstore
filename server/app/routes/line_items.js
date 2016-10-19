@@ -11,6 +11,18 @@ router.get('/', function(req, res, next){
 		.catch(next);
 });
 
+router.get('/:userId', function(req, res, next){
+	LineItem.findAll({
+		where: {
+			userId: req.params.userId
+		}
+	})
+	.then(function(lineItems){
+		res.send(lineItems);
+	})
+	.catch(next);
+});
+
 router.post('/:userId/:productId', function(req, res, next){
 	LineItem.create({
 		quantity: req.body.quantity,
