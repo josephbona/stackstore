@@ -11,9 +11,11 @@ router.get('/', function(req, res, next){
 		.catch(next);
 });
 
-router.post('/', function(req, res, next){
+router.post('/:userId/:productId', function(req, res, next){
 	LineItem.create({
 		quantity: req.body.quantity,
+		userId: req.params.userId,
+		productId: req.params.productId
 	})
 	.then(function(lineItem){
 		res.send(lineItem);
