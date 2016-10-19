@@ -45,11 +45,12 @@ if(process.env.SYNC) {
   .catch(function (err) {
       console.error(chalk.red(err.stack));
   });
+} else {
+  db.sync()
+  .then(createApplication)
+  .then(startServer)
+  .catch(function (err) {
+      console.error(chalk.red(err.stack));
+  });
 }
 
-db.sync()
-.then(createApplication)
-.then(startServer)
-.catch(function (err) {
-    console.error(chalk.red(err.stack));
-});
