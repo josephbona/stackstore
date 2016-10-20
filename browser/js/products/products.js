@@ -1,5 +1,4 @@
 app.config(function ($stateProvider) {
-    // Register our *products* state.
     $stateProvider.state('products', {
         url: '/products',
         controller: 'ProductsCtrl',

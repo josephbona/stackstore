@@ -1,32 +1,30 @@
-app.factory('CartService', function($http){
+app.factory('CartService', function($http, AuthService){
 
-	var _cart = {}; 
+	var _cart = {};
 
 	return {
 
-		cart: _cart, 
+		cart: _cart,
 
 		//no existing route for this
 		findByUserId: function(userId){
-			return $http.get('/api/line_items', userId)
+			return $http.get('/api/line_items/' + userId)
 			.then(function(result){
-				angular.copy(result.data, _cart); 
-				return cart; 
+				return result.data;
 			})
-		}, 
+		},
 
-		//doesn't match the route (needs product and quantity)
-		// create: function(productId, quantity){
-		// 	return $http.post('/api/line_items')
-		// 	.then(function(result){
-		// 		angular.copy(result.data, _cart); 
-		// 		return cart; 
-		// 	})
-		// }, 
+		create: function(productId, quantity){
+			return $http.post('/api/line_items/' )
+			.then(function(result){
+				angular.copy(result.data, _cart);
+				return cart;
+			})
+		},
 
 		destroy: function(){
 
-		}, 
+		},
 
 		update: function(){
 
@@ -35,4 +33,4 @@ app.factory('CartService', function($http){
 
 	}
 
-}) 
+})

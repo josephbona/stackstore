@@ -27,7 +27,7 @@ LineItem.belongsTo(User);
 User.hasMany(Review);
 Review.belongsTo(User);
 Product.hasMany(Review);
-// LineItem.hasOne(Product);
+LineItem.belongsTo(Product);
 
 //Product.hasOne(Category);
 Product.belongsTo(Category);
