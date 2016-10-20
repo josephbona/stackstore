@@ -3,7 +3,13 @@ app.config(function ($stateProvider) {
     $stateProvider.state('login', {
         url: '/login',
         templateUrl: 'js/login/login.html',
-        controller: 'LoginCtrl'
+        controller: 'LoginCtrl',
+        // @TODO: try and send a message to login when you come from successful register
+        resolve: {
+            message: function($stateParams) {
+                return $stateParams.message;
+            }
+        }
     });
 
 });
