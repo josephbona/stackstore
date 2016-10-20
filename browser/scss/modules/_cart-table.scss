@@ -126,3 +126,8 @@
     float: right;
   }
 }
+.no-cart {
+  @extend .lead;
+  text-align: center;
+  margin: 0;
+}

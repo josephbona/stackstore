@@ -28,7 +28,7 @@ app.factory('ProductService', function($http){
 			return $http.post('/api/products', product)
 			.then(function(result){
 				angular.copy(result.data, _product);
-				return product;
+				return _product;
 			});
 		},
 
@@ -37,13 +37,13 @@ app.factory('ProductService', function($http){
 			.then(function(){
 				angular.copy({}, _product);
 			})
-		}, 
+		},
 
 		update: function(product){
 			return $http.put('/api/products/' + product.id)
 			.then(function(result){
-				angular.copy(result.data, _product); 
-				return product; 
+				angular.copy(result.data, _product);
+				return _product;
 			})
 		}
 

@@ -3,7 +3,13 @@ app.config(function ($stateProvider) {
     $stateProvider.state('login', {
         url: '/login',
         templateUrl: 'js/login/login.html',
-        controller: 'LoginCtrl'
+        controller: 'LoginCtrl',
+        // @TODO: try and send a message to login when you come from successful register
+        resolve: {
+            message: function($stateParams) {
+                return $stateParams.message;
+            }
+        }
     });
 
 });
@@ -18,7 +24,7 @@ app.controller('LoginCtrl', function ($scope, AuthService, $state) {
         $scope.error = null;
 
         AuthService.login(loginInfo).then(function () {
-            $state.go('products');
+            $state.go('home');
         }).catch(function () {
             $scope.error = 'Invalid login credentials.';
         });

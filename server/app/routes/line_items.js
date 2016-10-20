@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const LineItem = require('../../db').models.LineItem;
+const Product = require('../../db').models.Product;
 
 module.exports = router;
 
@@ -15,7 +16,8 @@ router.get('/:userId', function(req, res, next){
 	LineItem.findAll({
 		where: {
 			userId: req.params.userId
-		}
+		},
+		include: [ Product ]
 	})
 	.then(function(lineItems){
 		res.send(lineItems);

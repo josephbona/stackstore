@@ -12,11 +12,11 @@ var User = db.define('user', {
     },
     email: {
         type: Sequelize.STRING,
-        allowNull: Sequelize.STRING
+        allowNull: false
     },
     password: {
-        type: Sequelize.STRING, 
-        allowNull: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull: false
     },
     role: {
         type: Sequelize.STRING
@@ -30,7 +30,7 @@ var User = db.define('user', {
     country: {
         type: Sequelize.STRING
     },
-    
+
     // we should limit the entries here to several states: perhaps: "Empty", "Shopping", "Checkout" and "Complete"
     cartStatus: {
         type: Sequelize.STRING
