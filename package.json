@@ -7,7 +7,7 @@
     "start": "NODE_ENV=production DATABASE_URL=postgres://localhost/stackstore node server/start.js",
     "start:dev": "NODE_ENV=dev DATABASE_URL=postgres://localhost/stackstore nodemon --ignore /browser/* server/start.js --ignore /browser/*",
     "postinstall": "gulp build",
-    "seed": "DATABASE_URL=postgres://localhost/stackstore node seed.js "
+    "seed": "SEED=true DATABASE_URL=postgres://localhost/stackstore node seed.js "
   },
   "engines": {
     "node": ">=4.0.0"
