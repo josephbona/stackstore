@@ -33,15 +33,15 @@ app.factory('ProductService', function($http){
 			});
 		},
 
-		destroy: function(product){
-			return $http.delete('/api/products/' + product.id)
+		destroy: function(id){
+			return $http.delete('/api/products/' + id)
 			.then(function(){
 				angular.copy({}, _product);
 			})
 		},
 
-		update: function(product){
-			return $http.put('/api/products/' + product.id)
+		update: function(id){
+			return $http.put('/api/products/' + id)
 			.then(function(result){
 				angular.copy(result.data, _product);
 				return _product;
