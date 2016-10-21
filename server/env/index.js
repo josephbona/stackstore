@@ -5,6 +5,7 @@ var testConfigPath = path.join(__dirname, './testing.js');
 
 console.log('NODE_ENV = ', process.env.NODE_ENV)
 
+
 if (process.env.NODE_ENV === 'production') {
     module.exports = require(productionConfigPath);
 } else if (process.env.NODE_ENV === 'testing') {
@@ -12,3 +13,5 @@ if (process.env.NODE_ENV === 'production') {
 } else {
     module.exports = require(devConfigPath);
 }
+
+console.log('DATABASE_URL = ', process.env.DATABASE_URL);
