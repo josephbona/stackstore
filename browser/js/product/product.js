@@ -1,15 +1,20 @@
 app.config(function ($stateProvider) {
-
-    // Register our *product* state.
     $stateProvider.state('product', {
-        url: '/product',
+        url: "/products/:id",
         controller: 'ProductController',
-        templateUrl: 'js/product/product.html'
+        templateUrl: 'js/product/product.html',
+        resolve: {
+    	   product: function(ProductService, $stateParams){
+            console.log($stateParams.id);
+              return ProductService.findById($stateParams.id);
+             }
+    	   }
+        });
     });
 
-});
-
-app.controller('ProductController', function ($scope) {
+app.controller('ProductController', function ($scope, product) {
+	$scope.product = product;
+	console.log("ProductController"	 )
 
 
 });

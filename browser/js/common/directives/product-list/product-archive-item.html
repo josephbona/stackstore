@@ -1,7 +1,7 @@
-<a ui-sref="product({{product.id}})" class="product-archive-item">
+<a ui-sref="product({id: product.id})" class="product-archive-item">
   <div class="image">
     <div class="image-centered">
-      <img src="{{product.image}}" alt="{{product.name}}">
+      <img ng-src="{{product.image}}" alt="{{product.name}}">
     </div>
   </div>
   <p class="title">{{product.name}}</p>

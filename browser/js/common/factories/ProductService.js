@@ -4,7 +4,7 @@ app.factory('ProductService', function($http){
 
 	return {
 
-		product: _product,
+		//product: _product,
 
 		findAll: function(){
 			return $http.get('/api/products')
@@ -15,11 +15,12 @@ app.factory('ProductService', function($http){
 			});
 		},
 
-		findById: function(product){
-			return $http.get('/api/products/' + product.id)
+		findById: function(id){
+			console.log('using findById Factory')
+			return $http.get('/api/products/' + id)
 			.then(function(result){
 				angular.copy(result.data, _product);
-				return _product;
+				return result.data;
 			})
 
 		},

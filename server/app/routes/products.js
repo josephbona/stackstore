@@ -11,6 +11,15 @@ router.get('/', function(req, res, next){
 		.catch(next);
 });
 
+router.get('/:id', function(req, res, next){
+	console.log('req.params.id = ', req.params.id)
+	Product.findById(req.params.id)
+		.then(function(product){
+			res.send(product);
+		})
+		.catch(next);
+});
+
 router.post('/', function(req, res, next){
 	Product.create({
 		name: req.body.name,
