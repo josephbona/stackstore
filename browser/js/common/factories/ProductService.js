@@ -20,7 +20,7 @@ app.factory('ProductService', function($http){
 			.then(function(result){
 				angular.copy(result.data, _product);
 				return result.data;
-			})
+			});
 
 		},
 
@@ -36,7 +36,7 @@ app.factory('ProductService', function($http){
 			return $http.delete('/api/products/' + id)
 			.then(function(){
 				angular.copy({}, _product);
-			})
+			});
 		},
 
 		update: function(id){
@@ -44,9 +44,9 @@ app.factory('ProductService', function($http){
 			.then(function(result){
 				angular.copy(result.data, _product);
 				return _product;
-			})
+			});
 		}
 
 
 	};
-})
+});

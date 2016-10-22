@@ -5,10 +5,10 @@ app.config(function ($stateProvider) {
         templateUrl: '/js/products/products.html',
         resolve: {
     	   products: function(ProductService){
-    		  return ProductService.findAll()
+    		  return ProductService.findAll();
             }
     	}
-    })
+    });
 });
 
 

@@ -4,7 +4,9 @@ app.directive('productList', function() {
     scope: {
       products: '='
     },
-    templateUrl: 'js/common/directives/product-list/product-list.html'
+    templateUrl: 'js/common/directives/product-list/product-list.html',
+    controller: function(){
+    }
   };
 });
 
@@ -15,21 +17,11 @@ app.directive('productArchiveItem', function() {
       product: '='
     },
     templateUrl: 'js/common/directives/product-list/product-archive-item.html',
-    controller: function(AuthService, CartService, $scope, ProductService){
-      // General thought process here:
-      // get our logged in user and set it on scope
-      AuthService.getLoggedInUser()
-        .then(function(user){
-          $scope.user = user;
-        });
-
-      //when we add to cart...
+    controller: function(CartService, $scope, ProductService, Session){
       $scope.addToCart = function(productId){
-        console.log(productId);
         //if we don't have a user use the loggedOutCart function
-        if(!$scope.user){
+        if(!Session.user){
           $scope.cart = CartService.loggedOutCart(productId);
-          console.log($scope.cart);
         } 
         else 
         {

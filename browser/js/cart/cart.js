@@ -4,9 +4,11 @@ app.config(function ($stateProvider) {
       controller: 'CartCtrl',
       templateUrl: 'js/cart/cart.html',
       resolve: {
-        cartUser: function(AuthService) {
-          return AuthService.getLoggedInUser();
+        cartUser: function(Session) {
+          return  Session.user;
         },
+
+        // Pats note: I think this is working as it should 
         // @TODO: Cant get this Session.user (which gets current logged in user) to work unles it's in the resolve -__-
         // lineItems: function(CartService, Session) {
         //   var user = Session.user;
