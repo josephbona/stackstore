@@ -6,12 +6,18 @@ app.factory('CartService', function($http, AuthService){
 
 		cart: _cart,
 
+		loggedOutCart: function(id){
+			_cart.push(id);
+			return _cart;
+		},
+
 		findByUserId: function(userId){
 			return $http.get('/api/line_items/' + userId)
 			.then(function(result){
 				_cart = []; 
-				_cart.push(result.data); 
-			})
+				_cart.push(result.data);
+				return _cart; 
+			});
 		},
 
 		create: function(userId, lineItem){
@@ -19,7 +25,8 @@ app.factory('CartService', function($http, AuthService){
 				+ userId + '/' + lineItem.productId, lineItem)
 			.then(function(result){
 				_cart.push(result.data); 
-			})
+				return _cart;
+			});
 		},
 
 		destroy: function(lineItem){
@@ -27,7 +34,7 @@ app.factory('CartService', function($http, AuthService){
 			.then(function(){
 				var idx = _cart.indexOf(lineItem);
 				_cart.splice(idx,1);
-			})
+			});
 		},
 
 		update: function(lineItem){
@@ -35,10 +42,11 @@ app.factory('CartService', function($http, AuthService){
 			.then(function(result){
 				var idx = _cart.indexOf(lineItem);
 				_cart.splice(idx, 1, result.data);
-			})
+				return _cart;
+			});
 		}
 
 
-	}
+	};
 
-})
+});

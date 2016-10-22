@@ -11,7 +11,7 @@ const Faker = require('faker');
 //uses Faker module to create products for seeding. change i<NUMBER_OF_PRODUCTS for more/less
 var seedProducts = function(){
     var products = [];
-    var image = 'http://lorempixel.com/400/400/';
+    var image = '400.jpg';
 
     //create products array
     for (var i = 0; i < 25; i++){
