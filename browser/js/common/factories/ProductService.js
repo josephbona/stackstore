@@ -16,7 +16,6 @@ app.factory('ProductService', function($http){
 		},
 
 		findById: function(id){
-			console.log('using findById Factory')
 			return $http.get('/api/products/' + id)
 			.then(function(result){
 				angular.copy(result.data, _product);

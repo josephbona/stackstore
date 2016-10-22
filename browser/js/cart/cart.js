@@ -25,6 +25,7 @@ app.controller('CartCtrl', function ($scope, cartUser, CartService, ProductServi
 
     CartService.findByUserId($scope.cartUser)
       .then(function(lineItems) {
+        console.log(lineItems[0]);
         $scope.lineItems = lineItems[0];
       })
       .catch(function(err) {
@@ -36,10 +37,11 @@ app.controller('CartCtrl', function ($scope, cartUser, CartService, ProductServi
   else 
   {
     CartService.cart.forEach(function(item){ 
-      console.log(item);
       return ProductService.findById(item)
         .then(function(product){
-          $scope.lineItems.push(product);
+          console.log(product);
+          $scope.lineItems.push({"product": product, "quantity": 1});
+          console.log($scope.lineItems);
         });
     });
   }

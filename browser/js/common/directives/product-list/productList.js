@@ -5,7 +5,7 @@ app.directive('productList', function() {
       products: '='
     },
     templateUrl: 'js/common/directives/product-list/product-list.html'
-  }
+  };
 });
 
 app.directive('productArchiveItem', function() {
@@ -25,6 +25,7 @@ app.directive('productArchiveItem', function() {
 
       //when we add to cart...
       $scope.addToCart = function(productId){
+        console.log(productId);
         //if we don't have a user use the loggedOutCart function
         if(!$scope.user){
           $scope.cart = CartService.loggedOutCart(productId);
