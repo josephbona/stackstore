@@ -19,6 +19,9 @@ app.config(function ($stateProvider) {
 });
 
 app.controller('CartCtrl', function ($scope, cartUser, CartService, ProductService, Session, localStorageService) {
+  
+  $scope.cart = CartService.cart; 
+
   $scope.lineItems = [];
 
   //if we have a logged in user get their cart
@@ -27,7 +30,7 @@ app.controller('CartCtrl', function ($scope, cartUser, CartService, ProductServi
 
     CartService.findByUserId($scope.cartUser)
       .then(function(lineItems) {
-        console.log(lineItems[0]);
+        console.log('$scope.lineItems', lineItems[0]);
         $scope.lineItems = lineItems[0];
       })
       .catch(function(err) {

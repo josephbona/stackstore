@@ -24,9 +24,9 @@ app.factory('CartService', function($http, AuthService, Session, localStorageSer
 			});
 		},
 
-		create: function(userId, lineItem){
+		create: function(userId, productId){
 			return $http.post('/api/line_items/' 
-				+ userId + '/' + lineItem.productId, lineItem)
+				+ userId + '/' + productId, {'quantity': 1})
 			.then(function(result){
 				_cart.push(result.data); 
 				return _cart;

@@ -26,7 +26,7 @@ app.directive('productArchiveItem', function() {
         else 
         {
         //if we have a user create a line item
-          return CartService.create($scope.user.id, productId)
+          return CartService.create(Session.user.id, productId)
           .then(function(cart){
             $scope.cart = cart;
           })
