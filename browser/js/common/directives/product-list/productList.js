@@ -17,6 +17,9 @@ app.directive('productArchiveItem', function() {
       product: '='
     },
     templateUrl: 'js/common/directives/product-list/product-archive-item.html',
+
+    // I can't figure out why line 22 doesn't work! Lines 23-45 are copied&pasted from ProductController
+    // controller: 'ProductController'
     controller: function(CartService, $scope, ProductService, Session, $state){
       $scope.addToCart = function(productId){
         //if we don't have a user use the loggedOutCart function
