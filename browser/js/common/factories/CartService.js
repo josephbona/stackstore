@@ -1,4 +1,4 @@
-app.factory('CartService', function($http, AuthService){
+app.factory('CartService', function($http, AuthService, Session, localStorageService){
 
 	var _cart = [];
 
@@ -7,8 +7,11 @@ app.factory('CartService', function($http, AuthService){
 		cart: _cart,
 
 		loggedOutCart: function(id){
+			if (localStorageService.get('cart')){
+					_cart = localStorageService.get('cart');
+			}
 			_cart.push(id);
-			return _cart;
+			return localStorageService.set('cart', _cart);
 		},
 
 		findByUserId: function(userId){

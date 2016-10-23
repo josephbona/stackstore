@@ -18,7 +18,7 @@ app.config(function ($stateProvider) {
   });
 });
 
-app.controller('CartCtrl', function ($scope, cartUser, CartService, ProductService) {
+app.controller('CartCtrl', function ($scope, cartUser, CartService, ProductService, Session, localStorageService) {
   $scope.lineItems = [];
 
   //if we have a logged in user get their cart
@@ -38,14 +38,12 @@ app.controller('CartCtrl', function ($scope, cartUser, CartService, ProductServi
   // so i need the Product Service
   else 
   {
-    CartService.cart.forEach(function(item){ 
-      return ProductService.findById(item)
-        .then(function(product){
-          console.log(product);
-          $scope.lineItems.push({"product": product, "quantity": 1});
-          console.log($scope.lineItems);
-        });
-    });
+      localStorageService.get('cart').forEach(function(item){ 
+        return ProductService.findById(item)
+          .then(function(product){
+            $scope.lineItems.push({"product": product, "quantity": 1});
+          });
+      });
   }
 
   $scope.getCartTotal = function() {

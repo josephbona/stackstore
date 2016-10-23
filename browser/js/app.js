@@ -1,7 +1,7 @@
 'use strict';
-window.app = angular.module('FullstackGeneratedApp', ['fsaPreBuilt', 'ui.router', 'ui.bootstrap', 'ngAnimate']);
+window.app = angular.module('FullstackGeneratedApp', ['fsaPreBuilt', 'LocalStorageModule', 'ui.router', 'ui.bootstrap', 'ngAnimate']);
 
-app.config(function ($urlRouterProvider, $locationProvider) {
+app.config(function ($urlRouterProvider, $locationProvider, localStorageServiceProvider) {
     // This turns off hashbang urls (/#about) and changes it to something normal (/about)
     $locationProvider.html5Mode(true);
     // If we go to a URL that ui-router doesn't have registered, go to the "/" url.
@@ -10,6 +10,11 @@ app.config(function ($urlRouterProvider, $locationProvider) {
     $urlRouterProvider.when('/auth/:provider', function () {
         window.location.reload();
     });
+
+    localStorageServiceProvider
+        .setPrefix('app')
+        .setStorageType('sessionsStorage')
+        .setNotify(true, true);
 });
 
 // This app.run is for listening to errors broadcasted by ui-router, usually originating from resolves
