@@ -57,6 +57,8 @@ gulp.task('testServerJS', function () {
     require('babel-register');
     //testing environment variable
     process.env.NODE_ENV = 'testing';
+    //added the following variable as script couldn't seem to find it otherwise - RvdM
+    process.env.DATABASE_URL = 'postgres://localhost/stackstore'
 	return gulp.src('./tests/server/**/*.js', {
 		read: false
 	}).pipe(mocha({ reporter: 'spec' }));
