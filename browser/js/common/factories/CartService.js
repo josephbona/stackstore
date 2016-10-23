@@ -17,7 +17,7 @@ app.factory('CartService', function($http, AuthService, Session, localStorageSer
 		findByUserId: function(userId){
 			return $http.get('/api/line_items/' + userId)
 			.then(function(result){
-				console.log('result', result.data);
+				// console.log('result', result.data);
 				_cart = []; 
 				_cart.push(result.data);
 				return _cart; 

@@ -30,7 +30,7 @@ app.controller('CartCtrl', function ($scope, cartUser, CartService, ProductServi
 
     CartService.findByUserId($scope.cartUser)
       .then(function(lineItems) {
-        console.log('$scope.lineItems', lineItems[0]);
+        // console.log('$scope.lineItems', lineItems[0]);
         $scope.lineItems = lineItems[0];
       })
       .catch(function(err) {
