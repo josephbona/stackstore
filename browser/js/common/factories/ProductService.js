@@ -15,6 +15,13 @@ app.factory('ProductService', function($http){
 			});
 		},
 
+		filterByCategory: function(categoryId){
+			return $http.get('/api/categories/' + categoryId)
+			.then(function(result){
+				return result.data; 
+			})
+		},
+
 		findById: function(id){
 			return $http.get('/api/products/' + id)
 			.then(function(result){

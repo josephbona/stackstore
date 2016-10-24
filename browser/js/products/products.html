@@ -10,7 +10,12 @@
   <div class="container">
     <div class="row">
       <aside class="col-md-2 sidebar">
-        sidebar
+        <br>
+        <ul class="list-unstyled">
+          <li ng-repeat="category in categories">
+            <a ng-click="filterByCategory(category.id)">{{ category.name }}</a>
+          </li>
+        </ul>
       </aside>
       <div class="col-md-10">
         <div class="section-header">

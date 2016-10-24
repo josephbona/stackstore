@@ -1,5 +1,6 @@
 const router = require('express').Router();
-const Category = require('../../db').models.Category
+const Category = require('../../db').models.Category; 
+const Product = require('../../db').models.Product; 
 
 module.exports = router;
 
@@ -9,6 +10,17 @@ router.get('/', function(req, res, next){
 			res.send(category );
 		})
 		.catch(next);
+});
+
+router.get('/:id', function(req, res, next){
+	console.log('in route', req.params.id)
+	Product.findAll({
+		where: {categoryId: req.params.id}
+	})
+		.then(function(products){
+			res.send(products)		
+		})
+		.catch(next); 
 });
 
 router.post('/', function(req, res, next){
