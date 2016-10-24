@@ -40,27 +40,3 @@ app.controller('ProductController', function ($scope, product, CartService, Prod
 
 
 });
-
-    // controller: function(CartService, $scope, ProductService, Session, $state){
-    //   $scope.addToCart = function(productId){
-    //     //if we don't have a user use the loggedOutCart function
-    //     if(!Session.user){
-    //       $scope.cart = CartService.loggedOutCart(productId);
-    //       $state.go('cart');
-    //     } 
-    //     else 
-    //     {
-    //     //if we have a user create a line item
-    //       return CartService.create(Session.user.id, productId)
-    //       .then(function(cart){
-    //         $scope.cart = cart;
-    //       })
-    //       .then(function(){
-    //         $state.go('cart')
-    //       })
-    //       .catch(function(err){
-    //         console.log(err);
-    //       });
-    //     }
-    //   };
-    // }
