@@ -133,6 +133,7 @@ var seedLineItems = function () {
             productId: 6,
             quantity: 1,
         },
+        /*
           {
             userId: 2,
             productId: 7,
@@ -143,6 +144,7 @@ var seedLineItems = function () {
             productId: 8,
             quantity: 7,
         },
+        */
     ];
 
     var creatingLineItems = lineItems.map(function (Obj) {

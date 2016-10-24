@@ -1,5 +1,8 @@
 const router = require('express').Router();
 const User = require('../../db').models.User;
+const LineItem = require('../../db').models.LineItem;
+const Product = require('../../db').models.Product;
+const Order = require('../../db').models.Order;
 
 module.exports = router;
 
@@ -10,6 +13,22 @@ router.get('/', function(req, res, next){
 			res.send(users);
 		})
 		.catch(next);
+});
+
+router.get('/:id/orders', function(req, res, next){
+	User.findById(req.params.id, {
+		include: [{
+			model: Order,
+			include: [{ 
+				model: LineItem,
+				include: [ Product ]
+			}]
+		}]
+	})
+	.then(function(user){
+		res.send(user);
+	})
+	.catch(next);
 });
 
 router.post('/', function(req, res, next){

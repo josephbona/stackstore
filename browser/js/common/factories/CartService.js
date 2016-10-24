@@ -15,22 +15,28 @@ app.factory('CartService', function($http, AuthService, Session, localStorageSer
 		},
 
 		findByUserId: function(userId){
-			return $http.get('/api/line_items/' + userId)
-			.then(function(result){
-				// console.log('result', result.data);
-				_cart = []; 
-				_cart.push(result.data);
-				return _cart; 
-			});
+			return $http.get('/api/users/' + userId + '/orders')
+				.then(function(result){
+					_cart = [];
+					_cart.push(result.data);
+					return _cart;
+				});
 		},
 
-		create: function(userId, productId){
-			return $http.post('/api/line_items/' 
-				+ userId + '/' + productId, {'quantity': 1})
-			.then(function(result){
-				_cart.push(result.data); 
-				return _cart;
-			});
+		createOrder: function(userId){
+			return $http.post('/api/orders', { userId: userId})
+				.then(function(result){
+					_cart = [];
+					return result.data;	
+				});
+		},
+
+		addLineItem: function(userId, orderId, productId){
+			return $http.post('/api/line_items/' + userId + '/order/' + orderId + '/line_items', { quantity: 1, productId: productId})
+				.then(function(result){
+					_cart.push(result.data);
+					return _cart;
+				});
 		},
 
 		destroy: function(lineItem){

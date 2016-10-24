@@ -25,11 +25,12 @@ router.get('/:userId', function(req, res, next){
 	.catch(next);
 });
 
-router.post('/:userId/:productId', function(req, res, next){
+router.post('/:userId/order/:orderId/line_items', function(req, res, next){
 	LineItem.create({
 		quantity: req.body.quantity,
 		userId: req.params.userId,
-		productId: req.params.productId
+		productId: req.body.productId,
+		orderId: req.params.orderId
 	})
 	.then(function(lineItem){
 		res.send(lineItem);
