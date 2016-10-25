@@ -6,6 +6,7 @@ var Category = require('./models/category');
 var Product = require('./models/product');
 var LineItem = require('./models/lineItem');
 var Review = require('./models/review');
+var Order = require('./models/order');
 
 module.exports = {
 	db: db,
@@ -14,15 +15,20 @@ module.exports = {
 		Category: Category,
 		Product: Product,
 		LineItem: LineItem,
-		Review: Review
+		Review: Review,
+		Order: Order
 	}
 };
 
 // eslint-disable-next-line no-unused-vars
+Order.belongsTo(User);
+Order.hasMany(LineItem);
+LineItem.belongsTo(Order);
+LineItem.belongsTo(Product);
 
 User.hasMany(LineItem);
 Product.hasMany(LineItem);
-LineItem.belongsTo(User);
+//LineItem.belongsTo(User);
 
 User.hasMany(Review);
 Review.belongsTo(User);
@@ -32,6 +38,11 @@ LineItem.belongsTo(Product);
 //Product.hasOne(Category);
 Product.belongsTo(Category);
 Category.hasMany(Product);
+
+User.hasMany(Order);
+//Order.hasMany(LineItem);
+
+
 
 //Add this line if users can post products:
 // Product.belongsTo(User);

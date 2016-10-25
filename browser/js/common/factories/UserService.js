@@ -6,5 +6,5 @@ app.factory('UserService', function($http){
         return result.data;
       });
     }
-  }
+  };
 });

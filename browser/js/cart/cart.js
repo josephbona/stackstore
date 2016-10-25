@@ -29,9 +29,10 @@ app.controller('CartCtrl', function ($scope, cartUser, CartService, ProductServi
     $scope.cartUser = cartUser.id;
 
     CartService.findByUserId($scope.cartUser)
-      .then(function(lineItems) {
-        // console.log('$scope.lineItems', lineItems[0]);
-        $scope.lineItems = lineItems[0];
+      .then(function(cart) {
+        if (cart){
+          $scope.lineItems = cart.line_items;
+        }
       })
       .catch(function(err) {
         console.error(err);
@@ -41,12 +42,14 @@ app.controller('CartCtrl', function ($scope, cartUser, CartService, ProductServi
   // so i need the Product Service
   else 
   {
-      localStorageService.get('cart').forEach(function(item){ 
-        return ProductService.findById(item)
-          .then(function(product){
-            $scope.lineItems.push({"product": product, "quantity": 1});
-          });
-      });
+      if(localStorageService.get('cart')){
+        localStorageService.get('cart').forEach(function(item){ 
+          return ProductService.findById(item)
+            .then(function(product){
+              $scope.lineItems.push({"product": product, "quantity": 1});
+            });
+        });
+      }
   }
 
   $scope.getCartTotal = function() {
@@ -56,5 +59,4 @@ app.controller('CartCtrl', function ($scope, cartUser, CartService, ProductServi
     }
     return total;
   };
-
 });

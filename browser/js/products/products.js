@@ -9,12 +9,11 @@ app.config(function ($stateProvider) {
             }, 
 
             categories: function(CategoryService){
-                return CategoryService.findAll()
+                return CategoryService.findAll();
             }
     	}
     });
 });
-
 
 app.controller('ProductsCtrl', function ($scope, products, categories, $state, ProductService) {
 
@@ -28,11 +27,10 @@ app.controller('ProductsCtrl', function ($scope, products, categories, $state, P
             $scope.products = products; 
         })
         .then(function(){
-            $state.go('products')
+            $state.go('products');
         })
         .catch(function(err){
             console.log(err);
-        })
-    }
-
+        });
+    };
 });

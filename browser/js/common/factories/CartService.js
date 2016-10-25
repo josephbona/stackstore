@@ -15,22 +15,27 @@ app.factory('CartService', function($http, AuthService, Session, localStorageSer
 		},
 
 		findByUserId: function(userId){
-			return $http.get('/api/line_items/' + userId)
-			.then(function(result){
-				// console.log('result', result.data);
-				_cart = []; 
-				_cart.push(result.data);
-				return _cart; 
-			});
+			return $http.post('/api/users/' + userId + '/orders')
+				.then(function(result){
+					angular.copy(result.data, _cart);
+					return _cart;
+				});
 		},
 
-		create: function(userId, productId){
-			return $http.post('/api/line_items/' 
-				+ userId + '/' + productId, {'quantity': 1})
-			.then(function(result){
-				_cart.push(result.data); 
-				return _cart;
-			});
+		createOrder: function(userId){
+			return $http.post('/api/orders', { userId: userId})
+				.then(function(result){
+					_cart = [];
+					return result.data;	
+				});
+		},
+
+		addLineItem: function(product){
+			return $http.post('/api/line_items/' + Session.user.id + '/order/' + _cart.id + '/line_items', { quantity: 1, productId: product.id} )
+				.then(function(result){
+					_cart.push(result.data);
+					return _cart;
+				});
 		},
 
 		destroy: function(lineItem){
@@ -53,4 +58,16 @@ app.factory('CartService', function($http, AuthService, Session, localStorageSer
 
 	};
 
+})
+.run(function(CartService, $rootScope, AUTH_EVENTS, Session){
+	$rootScope.$on(AUTH_EVENTS.loginSuccess, function(){
+		CartService.findByUserId(Session.user.id);
+	});
 });
+
+
+
+
+
+
+
