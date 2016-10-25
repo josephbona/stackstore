@@ -5,9 +5,19 @@ const Product = require('../../db').models.Product;
 const Order = require('../../db').models.Order;
 
 module.exports = router;
-
+/*
+var ensureAuthenticated = function (req, res, next) {
+    var err;
+    if (req.isAuthenticated()) {
+        next();
+    } else {
+        err = new Error('You must be logged in.');
+        err.status = 401;
+        next(err);
+    }
+};
+*/
 router.get('/', function(req, res, next){
-	console.log(User);
 	User.findAll()
 		.then(function(users){
 			res.send(users);
@@ -15,16 +25,18 @@ router.get('/', function(req, res, next){
 		.catch(next);
 });
 
-router.get('/:id/orders', function(req, res, next){
-	User.findById(req.params.id, {
-		include: [{
-			model: Order,
-			include: [{ 
-				model: LineItem,
-				include: [ Product ]
-			}]
-		}]
-	})
+router.post('/:id/orders', function(req, res, next){
+	console.log('@@@@@', req.user);
+	Order.getUserCart(req.user)
+		.then(function(cart){
+			console.log(cart);
+			/*return Order.findById(cart.id, {
+				include: [{ 
+					model: LineItem,
+					include: [ Product ] 
+				}]			
+			});*/
+		})
 	.then(function(user){
 		res.send(user);
 	})

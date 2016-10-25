@@ -35,10 +35,12 @@ LineItem.belongsTo(Product);
 Product.belongsTo(Category);
 Category.hasMany(Product);
 
-Order.belongsTo(User);
 User.hasMany(Order);
-Order.hasMany(LineItem);
+//Order.hasMany(LineItem);
+
+Order.belongsTo(User);
 LineItem.belongsTo(Order);
+LineItem.belongsTo(Product);
 
 //Add this line if users can post products:
 // Product.belongsTo(User);

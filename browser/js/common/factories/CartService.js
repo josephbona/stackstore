@@ -15,7 +15,7 @@ app.factory('CartService', function($http, AuthService, Session, localStorageSer
 		},
 
 		findByUserId: function(userId){
-			return $http.get('/api/users/' + userId + '/orders')
+			return $http.post('/api/users/' + userId + '/orders')
 				.then(function(result){
 					_cart = [];
 					_cart.push(result.data);
@@ -59,4 +59,19 @@ app.factory('CartService', function($http, AuthService, Session, localStorageSer
 
 	};
 
+})
+.run(function(CartService, $rootScope, AUTH_EVENTS, Session){
+	$rootScope.$on(AUTH_EVENTS.loginSuccess, function(){
+		CartService.findByUserId(Session.user.id)
+			.then(function(cart){
+				$rootScope.cart = cart;
+			});
+	});
 });
+
+
+
+
+
+
+
