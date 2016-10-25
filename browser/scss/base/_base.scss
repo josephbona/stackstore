@@ -24,3 +24,25 @@ h1, h2, h3, h4, h5, h6 {
 a {
 	cursor: pointer;
 }
+.section-heading {
+	margin: 15px 0;
+	@include clearfix();
+	.section-title {
+		text-align: center;
+		margin: 0;
+		font-size: 22px;
+		line-height: 24px;
+		@include min-width($screen-sm-min) {
+			float: left;
+			text-align: left;
+		}
+	}
+	.section-heading-link {
+		text-align: center;
+		line-height: 24px;
+		@include min-width($screen-sm-min) {
+			float: right;
+			text-align: left;
+		}
+	}
+}

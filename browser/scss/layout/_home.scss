@@ -1,0 +1,15 @@
+.home-carousel {
+  margin: 20px 0;
+}
+.featured-products {
+  padding: 20px 0;
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+  .section-heading {
+    margin-top: 0;
+    margin-bottom: 20px;
+  }
+}
+.col-fifth {
+  @include make-sm-column(2.4, 30px);
+}

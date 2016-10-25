@@ -7,9 +7,12 @@
     </div>
   </div>
   <section class="featured-products">
-    <h2>Top Selling Items</h2>
+    <div class="section-heading">
+      <h3 class="section-title">Top Selling Items</h3>
+      <a ui-sref="products" class="section-heading-link">View All Products &raquo;</a>
+    </div>
     <div class="row product-archive">
-      <div class="col-sm-3" ng-repeat="product in products | limitTo: 4">
+      <div class="col-fifth" ng-repeat="product in products | limitTo: 5">
         <product-archive-item product="product"></product-archive-item>
       </div>
     </div>
