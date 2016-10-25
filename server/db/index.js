@@ -21,6 +21,10 @@ module.exports = {
 };
 
 // eslint-disable-next-line no-unused-vars
+Order.belongsTo(User);
+Order.hasMany(LineItem);
+LineItem.belongsTo(Order);
+LineItem.belongsTo(Product);
 
 User.hasMany(LineItem);
 Product.hasMany(LineItem);
@@ -38,9 +42,7 @@ Category.hasMany(Product);
 User.hasMany(Order);
 //Order.hasMany(LineItem);
 
-Order.belongsTo(User);
-LineItem.belongsTo(Order);
-LineItem.belongsTo(Product);
+
 
 //Add this line if users can post products:
 // Product.belongsTo(User);

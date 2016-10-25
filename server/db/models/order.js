@@ -10,9 +10,8 @@ var Order = db.define('order', {
 },{
 	classMethods: {
 		getUserCart: function(user){
-			console.log(user);
 			var that = this;
-			this.findOne({ where: {
+			return this.findOne({ where: {
 				userId: user.id,
 				status: 'cart'
 			}})

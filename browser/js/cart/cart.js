@@ -29,10 +29,10 @@ app.controller('CartCtrl', function ($scope, cartUser, CartService, ProductServi
     $scope.cartUser = cartUser.id;
 
     CartService.findByUserId($scope.cartUser)
-      .then(function(user) {
-        console.log(user);
-        console.log(user[0].orders[0].line_items); 
-        $scope.lineItems = user[0].orders[0].line_items;
+      .then(function(cart) {
+        if (cart){
+          $scope.lineItems = cart.line_items;
+        }
       })
       .catch(function(err) {
         console.error(err);

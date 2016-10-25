@@ -17,19 +17,18 @@ app.directive('productArchiveItem', function() {
       product: '='
     },
     templateUrl: 'js/common/directives/product-list/product-archive-item.html',
-    controller: function(CartService, $scope, ProductService, Session, $state){
+    controller: function(CartService, $scope, ProductService, $rootScope, Session, $state){
 
-      $scope.addToCart = function(productId){
+      $scope.addToCart = function(product){
         //if we don't have a user use the loggedOutCart function
         if(!Session.user){
-          $scope.cart = CartService.loggedOutCart(productId);
+          $scope.cart = CartService.loggedOutCart(product.id);
           $state.go('cart');
         } 
         else 
         {
-          return CartService.addLineItem(Session.user.id, order.id, productId)
+          return CartService.addLineItem(product)
             .then(function(cart){
-              console.log(cart);
               $scope.cart = cart;
             })
             .then(function(){

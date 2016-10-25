@@ -26,19 +26,17 @@ router.get('/', function(req, res, next){
 });
 
 router.post('/:id/orders', function(req, res, next){
-	console.log('@@@@@', req.user);
 	Order.getUserCart(req.user)
 		.then(function(cart){
-			console.log(cart);
-			/*return Order.findById(cart.id, {
+			return Order.findById(cart.id, {
 				include: [{ 
 					model: LineItem,
 					include: [ Product ] 
 				}]			
-			});*/
+			});
 		})
-	.then(function(user){
-		res.send(user);
+	.then(function(cart){
+		res.send(cart);
 	})
 	.catch(next);
 });
