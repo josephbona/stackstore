@@ -4,12 +4,16 @@ app.config(function ($stateProvider) {
     $stateProvider.state('user', {
         url: '/user',
         controller: 'UserController',
-        templateUrl: 'js/user/user.html'
+        templateUrl: 'js/user/user.html',
+        resolve: {
+        		user: function(UserService, Session){ 
+        			return UserService.findById(Session.user.id);
+        		}
+        }
     });
 
 });
 
-app.controller('UserController', function ($scope) {
-
-
+app.controller('UserController', function ($scope, UserService, user) {
+	$scope.user = user;
 });

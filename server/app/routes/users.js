@@ -25,6 +25,15 @@ router.get('/', function(req, res, next){
 		.catch(next);
 });
 
+router.get('/:id', function(req, res, next){
+	User.findById(req.params.id)
+		.then(function(user){
+			console.log(user);
+			res.send(user);
+		})
+		.catch(next);
+});
+
 router.post('/:id/orders', function(req, res, next){
 	Order.getUserCart(req.user)
 		.then(function(cart){
