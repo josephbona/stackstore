@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const Product = require('../../db').models.Product;
+const Category = require('../../db').models.Category;
 
 module.exports = router;
 
@@ -13,7 +14,12 @@ router.get('/', function(req, res, next){
 
 router.get('/:id', function(req, res, next){
 	console.log('req.params.id = ', req.params.id)
-	Product.findById(req.params.id)
+	Product.find({
+		where: {
+			id: req.params.id
+		},
+		include: [Category]
+	})
 		.then(function(product){
 			res.send(product);
 		})
@@ -34,10 +40,10 @@ router.post('/', function(req, res, next){
 router.put('/:id', function(req, res, next){
 	Product.findById(req.params.id)
 		.then(function(product){
-			//assumes req.body name, description. get product object passed in instead? 
+			//assumes req.body name, description. get product object passed in instead?
 			product.name = req.body.name;
 			product.description = req.body.description;
-			
+
 			product.save()
 				.then(function(product){
 					res.send(product);
