@@ -15,12 +15,14 @@
 
 @import
   'layout/header',
+  'layout/navigation',
   'layout/breadcrumbs',
   'layout/sidebar',
   'layout/product-archive',
   'layout/product-single';
 
 @import
+  'modules/carousel',
   'modules/search',
   'modules/login-form',
   'modules/cart-table';
