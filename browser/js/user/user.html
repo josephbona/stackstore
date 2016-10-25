@@ -1,2 +1,6 @@
 user.html
-{{user}}
+<div class='container'>
+	<ul>
+		<li ng-repeat='(key, value) in user'> {{key}} : {{value}} <a class='pull-right'>Edit</a></li>
+	</ul>
+</div>

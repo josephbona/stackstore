@@ -16,7 +16,7 @@ app.factory('UserService', function($http){
     findById: function(id){
     	return $http.get('/api/users/' + id)
     	.then(function(result){
-    		angular.copy(result.data, _user);
+    		_user = result.data;
     		return _user;
     	});
     }
