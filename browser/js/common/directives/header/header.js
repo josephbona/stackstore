@@ -1,4 +1,4 @@
-app.directive('header', function($rootScope, AuthService, AUTH_EVENTS, $state) {
+app.directive('header', function($rootScope, AuthService, AUTH_EVENTS, $state, CartService ) {
 
   return {
     restrict: 'E',
@@ -21,6 +21,17 @@ app.directive('header', function($rootScope, AuthService, AUTH_EVENTS, $state) {
       var setUser = function() {
         AuthService.getLoggedInUser().then(function(user) {
           scope.user = user;
+
+          console.log(CartService);
+          CartService.findByUserId(scope.user.id)
+          .then(function(cart) {
+            if (cart){
+              scope.lineItems = cart.line_items;
+            }
+          })
+          .catch(function(err) {
+            console.error(err);
+          });
         });
       };
 
@@ -33,7 +44,6 @@ app.directive('header', function($rootScope, AuthService, AUTH_EVENTS, $state) {
       $rootScope.$on(AUTH_EVENTS.loginSuccess, setUser);
       $rootScope.$on(AUTH_EVENTS.logoutSuccess, removeUser);
       $rootScope.$on(AUTH_EVENTS.sessionTimeout, removeUser);
-
     }
   };
 
