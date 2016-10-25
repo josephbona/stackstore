@@ -1,5 +1,5 @@
 <div class="container">
-	<div class="row">
+	<div class="row product-single">
 		<div class="col-sm-9">
 			<div class="row">
 				<div class="col-md-5">
@@ -8,21 +8,28 @@
 					</div>
 				</div>
 				<div class="col-md-7">
-					<div class="product-desc">
-						<h1>{{product.name}}</h1>
-						<h2>${{product.price}}</h2>
-						<div class="product-rating">
-							<span>Avg customer rating:</span>
-							<i class="fa fa-star"></i>
-							<i class="fa fa-star"></i>
-							<i class="fa fa-star"></i>
-							<i class="fa fa-star-o"></i>
-							<i class="fa fa-star-o"></i>
+					<div class="product-info">
+						<h1 class="title">{{product.name}}</h1>
+						<div class="price">
+					    <!-- @TODO: separate price into decimal -->
+					    <span class="amount"><sup>$</sup>{{product.price}}<sup>00</sup></span>
+					    <!-- <span class="label">On Sale</span> -->
+					  </div>
+						<div class="reviews">
+							Avg customer rating:
+						  <span class="stars">
+						    <i class="fa fa-star"></i>
+						    <i class="fa fa-star"></i>
+						    <i class="fa fa-star"></i>
+						    <i class="fa fa-star"></i>
+						    <i class="fa fa-star-half-o"></i>
+						  </span>
+						  <span class="number">25 Reviews</span>
 						</div>
-						<form class="form-inline">
+						<form class="form-inline add-to-cart">
 							<div class="form-group">
 								<label for="quantity">Quantity:</label>
-								<input type="text" class="form-control" id="quantity" placeholder="1">
+								<input type="text" class="form-control quantity-control" id="quantity" placeholder="1">
 							</div>
 							<div class="form-group">
 								<button ng-click="addToCart(product.id)" class="btn btn-primary">Add To Cart</button>
@@ -30,12 +37,13 @@
 						</form>
 
 						<div>
-							<p>{{product.description}}</p>
+							<p><strong>Product Description:</strong><br>
+							{{product.description}}</p>
 						</div>
 						<hr>
-						<ul class="fa-ul">
-							<li><i class="fa-li fa fa-search"></i>SKU: {{product.id}}</li>
-							<li><i class="fa-li fa fa-th-list"></i>Category: <a href="#">{{product.category.name}}</a></li>
+						<ul class="product-meta">
+							<li><span><i class="fa fa-search"></i>Product ID:</span> {{product.id}}</li>
+							<li><span><i class="fa fa-th-list"></i>Category:</span> <a href="#">{{product.category.name}}</a></li>
 						</ul>
 					</div>
 				</div>
