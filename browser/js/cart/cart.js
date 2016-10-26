@@ -24,9 +24,18 @@ app.controller('CartCtrl', function ($scope, cartUser, CartService, ProductServi
 
   $scope.lineItems = [];
 
+  $scope.destroyLineItem =  function (lineItem){ 
+    CartService.destroy(lineItem) 
+    // console.log('destroy lineItem:', lineItem)
+    // var idx = $scope.lineItems.indexOf(lineItem);
+    // console.log('idx = ', idx)
+    // $scope.lineItems.splice(idx,1);
+  }
+
   //if we have a logged in user get their cart
   if (cartUser){
     $scope.cartUser = cartUser.id;
+
 
     CartService.findByUserId($scope.cartUser)
       .then(function(cart) {
@@ -43,14 +52,17 @@ app.controller('CartCtrl', function ($scope, cartUser, CartService, ProductServi
   else 
   {
       if(localStorageService.get('cart')){
-        localStorageService.get('cart').forEach(function(item){ 
+              localStorageService.get('cart').forEach(function(item){ 
           return ProductService.findById(item)
             .then(function(product){
-              $scope.lineItems.push({"product": product, "quantity": 1});
+              $scope.lineItems.push({"product": product, "quantity": 2});
             });
         });
       }
   }
+
+ 
+
 
   $scope.getCartTotal = function() {
     var total = 0;

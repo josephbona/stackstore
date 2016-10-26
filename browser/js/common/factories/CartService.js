@@ -14,6 +14,10 @@ app.factory('CartService', function($http, AuthService, Session, localStorageSer
 			return localStorageService.set('cart', _cart);
 		},
 
+
+
+
+
 		findByUserId: function(userId){
 			return $http.post('/api/users/' + userId + '/orders')
 				.then(function(result){
@@ -39,6 +43,7 @@ app.factory('CartService', function($http, AuthService, Session, localStorageSer
 		},
 
 		destroy: function(lineItem){
+			console.log('destroy')
 			return $http.destroy('/api/line_items/' + lineItem.id)
 			.then(function(){
 				var idx = _cart.indexOf(lineItem);
