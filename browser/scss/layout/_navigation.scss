@@ -1,0 +1,17 @@
+.site-navigation {
+  background-color: darken($brand-primary, 8%);
+
+  .navbar-nav {
+    li {
+      a {
+        @include transition(all 300ms);
+        color: white;
+        text-transform: uppercase;
+        &:hover, &:focus {
+          color: white;
+          background-color: darken($brand-primary, 6%);
+        }
+      }
+    }
+  }
+}

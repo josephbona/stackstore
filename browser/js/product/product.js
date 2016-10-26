@@ -20,11 +20,11 @@ app.controller('ProductController', function ($scope, product, CartService, Prod
         if(!Session.user){
           $scope.cart = CartService.loggedOutCart(productId);
           $state.go('cart');
-        } 
-        else 
+        }
+        else
         {
         //if we have a user create a line item
-          return CartService.create(Session.user.id, productId)
+          return CartService.addLineItem(product)
           .then(function(cart){
             $scope.cart = cart;
           })

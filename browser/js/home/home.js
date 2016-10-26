@@ -2,7 +2,17 @@ app.config(function ($stateProvider) {
     $stateProvider.state('home', {
         url: '/',
         templateUrl: 'js/home/home.html',
-        controller: function($scope, $rootScope, AuthService, AUTH_EVENTS) {
+        resolve: {
+          products: function(ProductService){
+            return ProductService.findAll();
+          },
+          categories: function(CategoryService){
+            return CategoryService.findAll();
+          }
+        },
+        controller: function($scope, $rootScope, AuthService, AUTH_EVENTS, products) {
+
+          $scope.products = products;
 
           $scope.user = null;
 
@@ -34,4 +44,20 @@ app.config(function ($stateProvider) {
 
         }
     });
+});
+
+app.controller('CarouselCtrl', function ($scope) {
+  $scope.myInterval = 5000;
+  $scope.noWrapSlides = false;
+  $scope.active = 0;
+  var slides = $scope.slides = [
+    {
+      id: 0,
+      image: 'http://localhost:1337/images/slide1.jpg',
+    },
+    {
+      id: 1,
+      image: 'http://localhost:1337/images/slide2.jpg',
+    }
+  ];
 });

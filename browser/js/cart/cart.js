@@ -52,8 +52,8 @@ app.controller('CartCtrl', function ($scope, cartUser, CartService, ProductServi
   else 
   {
       if(localStorageService.get('cart')){
-              localStorageService.get('cart').forEach(function(item){ 
-          return ProductService.findById(item)
+        localStorageService.get('cart').forEach(function(item){ 
+          return ProductService.findById(item.id)
             .then(function(product){
               $scope.lineItems.push({"product": product, "quantity": 2});
             });

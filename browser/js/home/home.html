@@ -1,4 +1,24 @@
 <div class="container">
+  <div ng-controller="CarouselCtrl">
+    <div class="home-carousel">
+      <div uib-carousel active="active" interval="myInterval" no-wrap="noWrapSlides">
+        <div class="carousel-item" uib-slide ng-repeat="slide in slides track by slide.id" index="slide.id" style="background-image: url('{{slide.image}}');"></div>
+      </div>
+    </div>
+  </div>
+  <section class="featured-products">
+    <div class="section-heading">
+      <h3 class="section-title">Top Selling Items</h3>
+      <a ui-sref="products" class="section-heading-link">View All Products &raquo;</a>
+    </div>
+    <div class="row product-archive">
+      <div class="col-fifth" ng-repeat="product in products | limitTo: 5">
+        <product-archive-item product="product"></product-archive-item>
+      </div>
+    </div>
+  </section>
+</div>
+<!-- <div class="container">
   <div ng-if="!user" class="jumbotron" style="margin-top: 30px;">
     <h2>StackStore.com</h2>
     <p class="lead">We don't know what we sell so don't ask us!</p>
@@ -9,4 +29,4 @@
     <p class="lead">We've been waiting for you. Buy some stuff.</p>
     <a ui-sref="products" class="btn btn-lg btn-info">Start adding to your cart</a>
   </div>
-</div>
+</div> -->
