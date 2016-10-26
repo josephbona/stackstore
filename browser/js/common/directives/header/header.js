@@ -1,4 +1,4 @@
-app.directive('header', function($rootScope, AuthService, AUTH_EVENTS, $state, CartService ) {
+app.directive('header', function($rootScope, AuthService, AUTH_EVENTS, $state, CartService, localStorageService ) {
 
   return {
     restrict: 'E',
@@ -7,6 +7,10 @@ app.directive('header', function($rootScope, AuthService, AUTH_EVENTS, $state, C
     link: function(scope) {
 
       scope.user = null;
+
+      if (!scope.user){
+        console.log(CartService.cart);
+      }
 
       scope.isLoggedIn = function() {
         return AuthService.isAuthenticated();
@@ -21,18 +25,18 @@ app.directive('header', function($rootScope, AuthService, AUTH_EVENTS, $state, C
       var setUser = function() {
         AuthService.getLoggedInUser().then(function(user) {
           scope.user = user;
-
-          console.log(CartService);
-          CartService.findByUserId(scope.user.id)
-          .then(function(cart) {
-            if (cart){
-              scope.lineItems = cart.line_items;
-            }
-          })
-          .catch(function(err) {
-            console.error(err);
-          });
-        });
+          if (scope.user){
+            CartService.findByUserId(scope.user.id)
+            .then(function(cart) {
+              if (cart){
+                scope.lineItems = cart.line_items;
+              }
+            })
+            .catch(function(err) {
+              console.error(err);
+            });
+          }
+        })
       };
 
       var removeUser = function() {

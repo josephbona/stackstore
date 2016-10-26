@@ -10,7 +10,9 @@ app.factory('CartService', function($http, AuthService, Session, localStorageSer
 			if (localStorageService.get('cart')){
 					_cart = localStorageService.get('cart');
 			}
-			_cart.push(id);
+			if (id){
+				_cart.push(id);
+			}
 			return localStorageService.set('cart', _cart);
 		},
 
