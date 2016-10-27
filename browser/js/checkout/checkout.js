@@ -4,12 +4,16 @@ app.config(function ($stateProvider) {
     $stateProvider.state('checkout', {
         url: '/checkout',
         controller: 'CheckoutController',
-        templateUrl: 'js/checkout/checkout.html'
+        templateUrl: 'js/checkout/checkout.html'   
+
     });
 
 });
 
-app.controller('CheckoutController', function ($scope) {
+app.controller('CheckoutController', function ($scope, UserService, Session, CartService) {
 
+	console.log('session', Session);
+	$scope.user = Session.user
+	$scope.cart = CartService.cart; 
 
 });
