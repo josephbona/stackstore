@@ -1,4 +1,5 @@
 admin.factory('CategoryService', function($http) {
+  var _category = {};
 
   return {
 

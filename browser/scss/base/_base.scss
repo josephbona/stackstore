@@ -71,15 +71,27 @@ a {
 	margin-bottom: 20px;
 	h4 {
 		margin: 0;
+		line-height: 33px;
+		text-align: center;
 	}
 	&.has-button {
 		@include clearfix();
-		h4 {
-			float: left;
-			line-height: 33px;
-		}
 		a {
-			float: right;
+			display: block;
+		}
+	}
+	@include min-width(500px) {
+		h4 {
+			text-align: left;
+		}
+		&.has-button {
+			h4 {
+				float: left;
+			}
+			a {
+				display: inline-block;
+				float: right;
+			}
 		}
 	}
 }

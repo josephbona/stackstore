@@ -12,19 +12,35 @@
 }
 
 .sidebar ul li {
-    border-bottom: 1px solid rgba(#000, 0.10);
+    border-bottom: 1px solid rgba(#000, 0.20);
     a {
-        font-size: 20px;
+        font-size: 18px;
         @include transition(all 200ms);
-        color: $text-color;
+        color: white;
         i {
             margin-right: 8px;
         }
         &:hover, &:focus {
-            background-color: #fbfbfb;
+            background-color: rgba(#fff, 0.10);
         }
         &.active {
-            background-color: #fbfbfb;
+            background-color: rgba(#fff, 0.10);
+        }
+    }
+    @include min-width($screen-sm-min) {
+        border-bottom: 1px solid rgba(#000, 0.10);
+        a {
+            font-size: 20px;
+            color: $text-color;
+            i {
+                margin-right: 8px;
+            }
+            &:hover, &:focus {
+                background-color: #fbfbfb;
+            }
+            &.active {
+                background-color: #fbfbfb;
+            }
         }
     }
 }

@@ -1,7 +1,7 @@
 admin.config(function($stateProvider) {
   $stateProvider.state('dashboard', {
     url: '/admin',
-    // controller: 'DashboardCtrl',
+    controller: 'DashboardCtrl',
     templateUrl: '../js/admin/dashboard/dashboard.html',
     resolve: {
       orders: function(OrderService) {
@@ -9,4 +9,13 @@ admin.config(function($stateProvider) {
       }
     }
   });
+});
+
+admin.controller('DashboardCtrl', function($scope, ProductService, UserService) {
+  ProductService.findAll().then(function(products) {
+    $scope.productCount = products.length;
+  });
+  UserService.findAll().then(function(users) {
+    $scope.userCount = users.length;
+  })
 });

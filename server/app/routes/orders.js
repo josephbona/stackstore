@@ -6,11 +6,23 @@ const Order = require('../../db').models.Order;
 module.exports = router;
 
 router.get('/', function(req, res, next){
-	Order.findAll()
+	if(req.query.status) {
+		Order.findAll({
+			where: {
+				status: req.query.status
+			}
+		})
 		.then(function(orders){
 			res.send(orders);
 		})
 		.catch(next);
+	} else {
+		Order.findAll()
+		.then(function(orders){
+			res.send(orders);
+		})
+		.catch(next);
+	}
 });
 
 router.get('/:id', function(req, res, next){
@@ -20,7 +32,7 @@ router.get('/:id', function(req, res, next){
 		},
 		include: [ {
 			model: LineItem,
-			include: [Product] 
+			include: [Product]
 		}]
 	})
 	.then(function(lineItems){
