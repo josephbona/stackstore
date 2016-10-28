@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const Product = require('../../db').models.Product;
 const Category = require('../../db').models.Category;
+const Review = require('../../db').models.Review;
 
 module.exports = router;
 
@@ -18,7 +19,7 @@ router.get('/:id', function(req, res, next){
 		where: {
 			id: req.params.id
 		},
-		include: [Category]
+		include: [Category, Review]
 	})
 		.then(function(product){
 			res.send(product);

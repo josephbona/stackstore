@@ -12,8 +12,16 @@ app.config(function ($stateProvider) {
         });
     });
 
-app.controller('ProductController', function ($scope, product, CartService, ProductService, Session, $state) {
+app.controller('ProductController', function ($scope, product, CartService, ProductService, Session, $state, ReviewService) {
 	$scope.product = product;
+
+  $scope.getNumber = function(n){
+    return new Array(n);
+  };
+
+  $scope.addReview = function(review){
+    return ReviewService.create(review);
+  };
 
     $scope.addToCart = function(productId){
         //if we don't have a user use the loggedOutCart function
@@ -36,7 +44,4 @@ app.controller('ProductController', function ($scope, product, CartService, Prod
           });
         }
       };
-
-
-
 });

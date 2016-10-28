@@ -48,6 +48,24 @@
 					</div>
 				</div>
 			</div>
+			<div>
+				<button class='btn btn-primary'>Add Review</button>
+				<ul class='list-group'>
+					<li class='list-group-item' ng-repeat='review in product.reviews'>
+						<div class='panel'>
+							<div class='panel-heading'>
+								<span class="stars panel-title"> 
+									<i class="fa fa-star" ng-repeat='i in getNumber(review.rating) track by $index'></i>
+								</span>
+							</div>
+							<div class='panel-body'>
+								{{review.review}}
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+
 		</div>
 	</div>
 </div>

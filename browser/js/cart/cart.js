@@ -8,27 +8,20 @@ app.config(function ($stateProvider) {
           return  Session.user;
         },
 
-        // Pats note: I think this is working as it should 
-        // @TODO: Cant get this Session.user (which gets current logged in user) to work unles it's in the resolve -__-
-        // lineItems: function(CartService, Session) {
-        //   var user = Session.user;
-        //   return CartService.findByUserId(user.id);
-        // }
       }
   });
 });
 
 app.controller('CartCtrl', function ($scope, cartUser, CartService, ProductService, Session, localStorageService) {
-  
+  console.log('cartuser', cartUser);
   $scope.cart = CartService.cart; 
 
   $scope.lineItems = [];
 
   //if we have a logged in user get their cart
-  if (cartUser){
-    $scope.cartUser = cartUser.id;
+  if (Session.user){
 
-    CartService.findByUserId($scope.cartUser)
+    CartService.findByUserId(Session.user.id)
       .then(function(cart) {
         if (cart){
           $scope.lineItems = cart.line_items;
@@ -42,6 +35,8 @@ app.controller('CartCtrl', function ($scope, cartUser, CartService, ProductServi
   // so i need the Product Service
   else 
   {
+      console.log(Session.user);
+      console.log('F@#$@#$');
       if(localStorageService.get('cart')){
         localStorageService.get('cart').forEach(function(item){ 
           return ProductService.findById(item.id)
