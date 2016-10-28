@@ -40,6 +40,10 @@ module.exports = function (db) {
         res.sendFile(app.get('adminHTMLPath'));
     });
 
+    app.get('/admin/*', function (req, res) {
+        res.sendFile(app.get('adminHTMLPath'));
+    });
+
     app.get('/*', function (req, res) {
         res.sendFile(app.get('indexHTMLPath'));
     });

@@ -1,10 +1,10 @@
-window.admin = angular.module('StoreAdmin', ['fsaPreBuilt', 'ui.router', 'ui.bootstrap', 'datatables']);
+window.admin = angular.module('StoreAdmin', ['fsaPreBuilt', 'ui.router', 'ui.bootstrap', 'datatables', 'datatables.bootstrap']);
 
 admin.config(function($urlRouterProvider, $locationProvider) {
   // This turns off hashbang urls (/#about) and changes it to something normal (/about)
   $locationProvider.html5Mode(true);
   // If we go to a URL that ui-router doesn't have registered, go to the "/" url.
-  $urlRouterProvider.otherwise('/');
+  $urlRouterProvider.otherwise('/admin');
 });
 
 // This admin.run is for listening to errors broadcasted by ui-router, usually originating from resolves

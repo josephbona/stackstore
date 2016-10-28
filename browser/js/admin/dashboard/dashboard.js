@@ -1,7 +1,12 @@
 admin.config(function($stateProvider) {
   $stateProvider.state('dashboard', {
-    url: '/',
+    url: '/admin',
     // controller: 'DashboardCtrl',
-    templateUrl: '../js/admin/dashboard/dashboard.html'
+    templateUrl: '../js/admin/dashboard/dashboard.html',
+    resolve: {
+      orders: function(OrderService) {
+        return OrderService.findAll();
+      }
+    }
   });
 });

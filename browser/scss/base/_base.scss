@@ -30,6 +30,16 @@ h1, h2, h3, h4, h5, h6 {
 a {
 	cursor: pointer;
 }
+.icon-before {
+	i {
+		margin-right: 8px;
+	}
+}
+.icon-after {
+	i {
+		margin-left: 8px;
+	}
+}
 .section-heading {
 	margin: 15px 0;
 	@include clearfix();
@@ -56,6 +66,22 @@ a {
 	border-bottom: 1px solid #ccc;
 	padding-bottom: 15px;
 	margin-bottom: 25px;
+}
+.table-title {
+	margin-bottom: 20px;
+	h4 {
+		margin: 0;
+	}
+	&.has-button {
+		@include clearfix();
+		h4 {
+			float: left;
+			line-height: 33px;
+		}
+		a {
+			float: right;
+		}
+	}
 }
 .page-wrapper {
   padding: 0 15px;
