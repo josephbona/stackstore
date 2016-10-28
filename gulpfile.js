@@ -26,6 +26,7 @@ gulp.task('reload', function () {
 });
 
 gulp.task('reloadCSS', function () {
+    gulp.src('./public/admin.css').pipe(livereload());
     return gulp.src('./public/style.css').pipe(livereload());
 });
 
@@ -136,8 +137,15 @@ gulp.task('buildCSSProduction', function () {
         .pipe(gulp.dest('./public'))
 });
 
+gulp.task('buildAdminCSS', function () {
+    return gulp.src('./browser/scss/admin.scss')
+        .pipe(sass())
+        .pipe(minifyCSS())
+        .pipe(gulp.dest('./public'))
+});
+
 gulp.task('buildJSProduction', function () {
-    return gulp.src(['./browser/js/app.js', './browser/js/**/*.js'])
+    return gulp.src(['./browser/js/app.js', './browser/js/**/*.js', '!./browser/js/admin/**/*.js'])
         .pipe(concat('main.js'))
         .pipe(babel({
             presets: ['es2015']
@@ -146,6 +154,17 @@ gulp.task('buildJSProduction', function () {
         .pipe(uglify())
         .pipe(gulp.dest('./public'));
 });
+
+// gulp.task('buildAdminJs', function () {
+//     return gulp.src(['./browser/js/admin/app.js', './browser/js/admin/**/*.js', '!./browser/js/**/*.js'])
+//         .pipe(concat('admin.js'))
+//         .pipe(babel({
+//             presets: ['es2015']
+//         }))
+//         .pipe(ngAnnotate())
+//         .pipe(uglify())
+//         .pipe(gulp.dest('./public'));
+// });
 
 gulp.task('buildProduction', ['buildCSSProduction', 'buildJSProduction']);
 
@@ -156,7 +175,7 @@ gulp.task('build', function () {
     if (process.env.NODE_ENV === 'production') {
         runSeq(['buildJSProduction', 'buildCSSProduction']);
     } else {
-        runSeq(['buildJS', 'buildCSS']);
+        runSeq(['buildJS', 'buildAdminCSS', 'buildCSS']);
     }
 });
 
@@ -171,7 +190,7 @@ gulp.task('default', function () {
 
     // Run when anything inside of browser/scss changes.
     gulp.watch('browser/scss/**', function () {
-        runSeq('buildCSS', 'reloadCSS');
+        runSeq('buildCSS', 'buildAdminCSS', 'reloadCSS');
     });
 
     gulp.watch('server/**/*.js', ['lintJS']);

@@ -1,0 +1,19 @@
+@import
+  'base/reset',
+  'vendor/bootstrap',
+  'admin/adminicon',
+  'vendor/font-awesome';
+
+@import
+  'utils/mixins';
+
+@import
+  'base/base',
+  'base/fontstack',
+  'base/typography',
+  'base/no-gutters';
+
+@import
+  'admin/navbar-top-links',
+  'admin/sidebar',
+  'admin/dashboard';

@@ -13,14 +13,13 @@ var Product = db.define('product', {
 	},
 	image: {
 		type: Sequelize.STRING
-	}, 
+	},
 	price: {
-		type: Sequelize.DECIMAL,
-		allowNull: false
+		type: Sequelize.DECIMAL
 	},
 	salePrice: {
 		type: Sequelize.DECIMAL(10, 2)
-	}, 
+	},
 	quantity: {
 		type: Sequelize.INTEGER
 	},

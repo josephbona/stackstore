@@ -1,5 +1,8 @@
 body {
 	font-weight: 400;
+	&.admin {
+		font-weight: 300;
+	}
 }
 .container-fluid {
 	max-width: 1170px;
@@ -16,6 +19,9 @@ body {
 }
 h1, h2, h3, h4, h5, h6 {
 	text-transform: uppercase;
+	.admin & {
+		font-weight: 300;
+	}
 }
 .center-x {
 	margin-left: auto;
@@ -23,6 +29,16 @@ h1, h2, h3, h4, h5, h6 {
 }
 a {
 	cursor: pointer;
+}
+.icon-before {
+	i {
+		margin-right: 8px;
+	}
+}
+.icon-after {
+	i {
+		margin-left: 8px;
+	}
 }
 .section-heading {
 	margin: 15px 0;
@@ -44,5 +60,57 @@ a {
 			float: right;
 			text-align: left;
 		}
+	}
+}
+.admin-title {
+	border-bottom: 1px solid #ccc;
+	padding-bottom: 15px;
+	margin-bottom: 25px;
+}
+.table-title {
+	margin-bottom: 20px;
+	h4 {
+		margin: 0;
+		line-height: 33px;
+		text-align: center;
+	}
+	&.has-button {
+		@include clearfix();
+		a {
+			display: block;
+		}
+	}
+	@include min-width(500px) {
+		h4 {
+			text-align: left;
+		}
+		&.has-button {
+			h4 {
+				float: left;
+			}
+			a {
+				display: inline-block;
+				float: right;
+			}
+		}
+	}
+}
+.page-wrapper {
+  padding: 0 15px;
+  min-height: 568px;
+  background-color: #eee;
+	@include min-width($screen-sm-min) {
+		position: inherit;
+		margin: 0 0 0 250px;
+		padding: 0 30px;
+		border-left: 1px solid rgba(#000, 0.10);
+	}
+}
+.admin {
+	.panel-default {
+		border-top-color: rgba(#000, 0.05);
+		border-left-color: rgba(#000, 0.05);
+		border-right-color: rgba(#000, 0.15);
+		border-bottom-color: rgba(#000, 0.15);
 	}
 }

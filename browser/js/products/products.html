@@ -11,11 +11,9 @@
     <div class="row">
       <aside class="col-md-2 sidebar">
         <br>
-        <ul class="list-unstyled">
-          <li ng-repeat="category in categories">
-            <a ng-click="filterByCategory(category.id)">{{ category.name }}</a>
-          </li>
-        </ul>
+        <div class="list-group">
+          <a ng-repeat="category in categories" ng-click="filterByCategory(category.id)" class="list-group-item">{{ category.name }}</a>
+        </div>
       </aside>
       <div class="col-md-10">
         <div class="section-header">

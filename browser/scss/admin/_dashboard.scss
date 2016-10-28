@@ -1,0 +1,17 @@
+.glance {
+  text-align: center;
+  background: white;
+  padding: 15px;
+  font-size: 20px;
+  border: 1px solid;
+  border-top-color: rgba(#000, 0.05);
+  border-left-color: rgba(#000, 0.05);
+  border-right-color: rgba(#000, 0.15);
+  border-bottom-color: rgba(#000, 0.15);
+  margin-bottom: 20px;
+  .count {
+    font-size: 30px;
+    display: block;
+    font-weight: 700;
+  }
+}

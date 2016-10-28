@@ -18,7 +18,7 @@ app.factory('ProductService', function($http){
 		filterByCategory: function(categoryId){
 			return $http.get('/api/categories/' + categoryId)
 			.then(function(result){
-				return result.data; 
+				return result.data;
 			})
 		},
 
