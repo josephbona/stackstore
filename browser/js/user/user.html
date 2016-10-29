@@ -1,6 +1,69 @@
-user.html
 <div class='container'>
-	<ul>
-		<li ng-repeat='(key, value) in user'> {{key}} : {{value}} <a class='pull-right'>Edit</a></li>
-	</ul>
+	<div class='container'>
+		<p><h1>Welcome {{user.name}}!</h1></p>
+		<p> <small> Update your user information and view order history below. </small></p>
+		<div class='well' ng-show='saved'>
+			User Info Saved!
+		</div>
+
+		<div class='well', ng-show='error'>
+			Something has gone wrong! 
+		</div>
+		
+		<table class='table'>
+			<tbody>
+				<tr> 
+					<td> User name </td> 
+					<td> <a href='#' editable-text='user.name'>{{user.name}}</a></td>
+				</tr>
+				<tr>
+					<td>Email Address</td>
+					<td><a href='#' editable-email='user.email'>{{user.email}}</a></td>
+				</tr>
+				<tr>
+					<td>Shipping Address</td>
+					<td ng-show='!user.shipping_address'>
+						<a href='#' editable-text='user.shipping_address'>Add Shipping Address</a>
+					</td>
+				</td>
+				<td><a href='#' editable-text='user.shipping_address'>{{user.shipping_address}}</a></td>
+
+			</tr>
+			<tr>
+				<td>Billing Address</td>
+				<td ng-show='!user.billing_address'>
+					<a href='#' editable-text='user.billing_address'>Add Billing Address</a>
+				</td>
+				<td><a href='#' editable-text='user.billing_address'>{{user.billing_address}}</a></td>
+
+			</tr>
+			<tr>
+				<td>Country</td>
+				<td ng-show='!user.country'>
+					<a href='#' editable-text='user.country'>Add Country</a>
+				</td>
+				<td><a href='#' editable-text='user.country'>{{user.country}}</a></td>
+			</tr>
+			<tr>
+				<td>
+					<button ng-click='save()' class='btn btn-success'>Save</button>
+				</td>
+				<td>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	<table class='table'>
+		<thead>
+			<td>Order Status</td>
+			<td>Order Date</td>
+		</thead>
+		<tbody>
+			<tr ng-class="{success : order.status == 'completed', warning : order.status == 'pending', info : order.status == 'cart', danger : order.status == 'cancelled' }" ng-repeat='order in user.orders'>
+				<td> {{order.status}} </td>
+				<td> {{order.createdAt | date : 'medium'}} </td>
+			</tr>
+		</tbody>
+	</table>
 </div>
+
