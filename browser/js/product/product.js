@@ -7,20 +7,31 @@ app.config(function ($stateProvider) {
     	   product: function(ProductService, $stateParams){
             console.log($stateParams.id);
               return ProductService.findById($stateParams.id);
-             }
+             },
+          user: function(AuthService){
+            return AuthService.getLoggedInUser();
+          }
     	   }
         });
     });
 
-app.controller('ProductController', function ($scope, product, CartService, ProductService, Session, $state, ReviewService) {
+app.controller('ProductController', function (user, $scope, product, CartService, ProductService, Session, $state, ReviewService) {
 	$scope.product = product;
+  $scope.showReviewForm = false; 
+  $scope.user = user;
+  $scope.max = 5;
+
+  $scope.ratingStates = [
+    //{stateOn: 'fa-star', stateOff: 'fa-star-o'}
+  ]; 
 
   $scope.getNumber = function(n){
     return new Array(n);
   };
 
-  $scope.addReview = function(review){
-    return ReviewService.create(review);
+  $scope.addReview = function(product){
+    console.log($scope.review);
+    return ReviewService.create($scope.review, $scope.rate, product.id, $scope.user.id);
   };
 
     $scope.addToCart = function(productId){

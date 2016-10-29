@@ -25,15 +25,15 @@ var Order = db.define('order', {
 	},
 	getterMethods: {
 		createdDate: function() {
-			return formatDate(this);
+			//return formatDate(this);
 		}
 	}
 });
-
+/*
 function formatDate(date) {
 	var formattedDate = date.split(' ');
 	formattedDate = date[0].split('-');
 	return date[1] + '/' + date[2] + '/' + date[0];
 }
-
+*/
 module.exports = Order;

@@ -49,7 +49,16 @@
 				</div>
 			</div>
 			<div>
-				<button class='btn btn-primary'>Add Review</button>
+				<button ng-show='user && !showReviewForm' ng-click='showReviewForm = !showReviewForm' class='btn btn-primary'>Add Review</button>
+				<div class='panel'>	
+					<form name='form' ng-show='showReviewForm' ng-submit='addReview(product)'>
+						<input required ng-model='review' class='form-control' placeholder='Add your review here' />
+						<span uib-rating ng-model='rate' max='max'></span>
+						<button ng-disabled='form.$invalid' class='btn btn-success' type='submit'> Submit </button>
+						<button type='button' class='btn btn-danger' ng-click='showReviewForm = !showReviewForm'>Cancel</button>
+					</form>
+				</div>
+
 				<ul class='list-group'>
 					<li class='list-group-item' ng-repeat='review in product.reviews'>
 						<div class='panel'>
