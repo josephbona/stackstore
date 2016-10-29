@@ -24,7 +24,8 @@ module.exports = {
 Order.belongsTo(User);
 Order.hasMany(LineItem);
 LineItem.belongsTo(Order);
-LineItem.belongsTo(Product);
+//is this right:  ??  Commenting out for now.  -RvdM
+// LineItem.belongsTo(Product);
 
 User.hasMany(LineItem);
 Product.hasMany(LineItem);

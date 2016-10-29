@@ -34,10 +34,11 @@ app.controller('ProductController', function (user, $scope, product, CartService
     return ReviewService.create($scope.review, $scope.rate, product.id, $scope.user.id);
   };
 
-    $scope.addToCart = function(productId){
+    $scope.addToCart = function(product){
         //if we don't have a user use the loggedOutCart function
         if(!Session.user){
-          $scope.cart = CartService.loggedOutCart(productId);
+          console.log('product.js addTocart productId = ', product)
+          $scope.cart = CartService.loggedOutCart(product);
           $state.go('cart');
         }
         else

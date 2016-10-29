@@ -1,19 +1,19 @@
-app.factory('CartService', function($http, AuthService, Session, localStorageService){
+app.factory('CartService', function($state, $rootScope, $http, AuthService, Session, localStorageService){
 
-	var _cart = [];
+	var _cart = { line_items: [] };	
+	_cart.line_items = localStorageService.get('cart');
+
 
 	return {
 
 		cart: _cart,
 
-		loggedOutCart: function(id){
-			if (localStorageService.get('cart')){
-					_cart = localStorageService.get('cart');
+		loggedOutCart: function(product){		
+			if (product){
+				_cart.line_items.push(product);
 			}
-			if (id){
-				_cart.push(id);
-			}
-			return localStorageService.set('cart', _cart);
+			$rootScope.$broadcast('cartChange', _cart);
+			return _cart;
 		},
 
 		findByUserId: function(userId){
@@ -33,18 +33,18 @@ app.factory('CartService', function($http, AuthService, Session, localStorageSer
 		},
 
 		addLineItem: function(product){
+			var that = this;
 			return $http.post('/api/line_items/' + Session.user.id + '/order/' + _cart.id + '/line_items', { quantity: 1, productId: product.id} )
 				.then(function(result){
-					_cart.push(result.data);
-					return _cart;
+					return that.findByUserId(Session.user.id)
 				});
 		},
 
-		destroy: function(lineItem){
-			return $http.destroy('/api/line_items/' + lineItem.id)
+		destroy: function(lineItem, index){
+			return $http.delete('/api/line_items/' + lineItem.id, { lineItemId: lineItem.id } )
 			.then(function(){
-				var idx = _cart.indexOf(lineItem);
-				_cart.splice(idx,1);
+				 _cart.line_items.splice(index,1);
+				return _cart;	
 			});
 		},
 
@@ -61,11 +61,8 @@ app.factory('CartService', function($http, AuthService, Session, localStorageSer
 	};
 
 })
-.run(function(CartService, $rootScope, AUTH_EVENTS, Session){
-	$rootScope.$on(AUTH_EVENTS.loginSuccess, function(){
-		CartService.findByUserId(Session.user.id);
-	});
-});
+
+
 
 
 
