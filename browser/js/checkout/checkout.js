@@ -12,8 +12,8 @@ app.config(function ($stateProvider) {
 
 app.controller('CheckoutController', function ($scope, UserService, Session, CartService) {
 
-	console.log('session', Session);
-	$scope.user = Session.user
-	$scope.cart = CartService.cart; 
+	$scope.user = Session.user;
+	$scope.cart = CartService.cart.line_items; 
+	console.log(CartService.cart.line_items);
 
 });
