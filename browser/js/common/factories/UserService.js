@@ -19,6 +19,14 @@ app.factory('UserService', function($http){
     		_user = result.data;
     		return _user;
     	});
+    },
+
+    update: function(userInfo){
+      return  $http.put('/api/users/' + userInfo.id, userInfo)
+        .then(function(result){
+          _user = result.data;
+          return _user; 
+        });
     }
   };
 });
