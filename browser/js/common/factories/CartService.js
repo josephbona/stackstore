@@ -1,7 +1,7 @@
 app.factory('CartService', function($state, $rootScope, $http, AuthService, Session, localStorageService){
 
 	var _cart = { line_items: [] };	
-	_cart.line_items = localStorageService.get('cart');
+	// _cart.line_items = localStorageService.get('cart');
 
 
 	return {

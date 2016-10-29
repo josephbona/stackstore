@@ -51,8 +51,6 @@ app.controller('CartCtrl', function ($rootScope, $scope, cartUser, CartService, 
   // so i need the Product Service
   else 
   {
-      console.log(Session.user);
-      console.log('F@#$@#$');
       if(localStorageService.get('cart')){
         // $scope.cart = { line_items: [] };
         // $scope.lineItems = [];

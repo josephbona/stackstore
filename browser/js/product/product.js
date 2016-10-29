@@ -5,7 +5,6 @@ app.config(function ($stateProvider) {
         templateUrl: 'js/product/product.html',
         resolve: {
     	   product: function(ProductService, $stateParams){
-            console.log($stateParams.id);
               return ProductService.findById($stateParams.id);
              },
           user: function(AuthService){
@@ -37,7 +36,6 @@ app.controller('ProductController', function (user, $scope, product, CartService
     $scope.addToCart = function(product){
         //if we don't have a user use the loggedOutCart function
         if(!Session.user){
-          console.log('product.js addTocart productId = ', product)
           $scope.cart = CartService.loggedOutCart(product);
           $state.go('cart');
         }
