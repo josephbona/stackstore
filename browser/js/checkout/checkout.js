@@ -14,6 +14,7 @@ app.controller('CheckoutController', function ($scope, UserService, Session, Car
 
 	$scope.user = Session.user;
 	$scope.cart = CartService.cart.line_items; 
-	console.log(CartService.cart.line_items);
+	console.log(CartService.cart);
+	console.log(CartService.cart.line_items)
 
 });
