@@ -16,6 +16,8 @@ var Order = db.define('order', {
 				status: 'cart'
 			}})
 			.then(function(cart){
+
+				console.log('in order model getUserCart, returns this :', cart)
 				if(cart){
 					return cart;
 				}

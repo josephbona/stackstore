@@ -15,10 +15,11 @@ app.config(function ($stateProvider) {
 app.controller('ProductController', function ($scope, product, CartService, ProductService, Session, $state) {
 	$scope.product = product;
 
-    $scope.addToCart = function(productId){
+    $scope.addToCart = function(product){
         //if we don't have a user use the loggedOutCart function
         if(!Session.user){
-          $scope.cart = CartService.loggedOutCart(productId);
+          console.log('product.js addTocart productId = ', product)
+          $scope.cart = CartService.loggedOutCart(product);
           $state.go('cart');
         }
         else

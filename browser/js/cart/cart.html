@@ -21,12 +21,14 @@
                 <td class="col-xs-1">
                   <img class="image" ng-src="{{lineItem.product.image}}">
                 </td>
-                <td class="col-xs-4">{{lineItem.product.name}}</td>
+                <td class="col-xs-4">{{lineItem.product.name}}   (line-Item-Id: {{lineItem.id}})
+</td>
                 <td class="col-xs-2">${{lineItem.product.price}}</td>
                 <td class="col-xs-2"><input type="text" placeholder="{{lineItem.quantity}}"></td>
-                <td class="col-xs-2">${{(lineItem.product.price*1) * (lineItem.quantity*1)}}.00</td>
+                <td class="col-xs-2">${{(lineItem.product.price*1) * (lineItem.quantity*1)}}.00
+                                   </td>
                 <td class="col-xs-1">
-                 <button ng-click="destroyLineItem(lineItem)" class="btn btn-warning">Remove From Cart</button>
+                 <button ng-click="destroyLineItem({lineItem}, $index)" class="btn btn-warning btn-xs"  >Remove From Cart {{$index}}</button>
                  </td>
               </tr>
             </tbody>

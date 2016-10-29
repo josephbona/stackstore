@@ -6,7 +6,7 @@
       <div class="meta-links">
           Free shipping on orders over $50.
           <span ng-if="!user"><a ui-sref="login">Sign in</a> or <a ui-sref="register">Create an Account</a></span>
-          <span ng-if="user"><a ui-sref="user">View Account</a> or <a ng-click="logout()">Logout</a></span>
+          <span ng-if="user"><a ui-sref="user">{{user.name}}</a> or <a ng-click="logout()">Logout</a></span>
       </div>
       <div class="header-row">
         <div class="header-col-7">

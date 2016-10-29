@@ -8,9 +8,7 @@ app.directive('header', function($rootScope, AuthService, AUTH_EVENTS, $state, C
 
       scope.user = null;
 
-      if (!scope.user){
-        console.log(CartService.cart);
-      }
+    
 
       scope.isLoggedIn = function() {
         return AuthService.isAuthenticated();
@@ -18,9 +16,17 @@ app.directive('header', function($rootScope, AuthService, AUTH_EVENTS, $state, C
 
       scope.logout = function() {
         AuthService.logout().then(function() {
+          localStorageService.set('cart.line_items', [] );
+          scope.lineItems = [];
           $state.go('home');
         });
       };
+
+      $rootScope.$on('cartChange', function (event, _cart){
+        console.log('cartChange Broadcast received.  _cart = ', _cart)
+        scope.lineitems =  _cart;
+        $state.go('home');
+      })
 
       var setUser = function() {
         AuthService.getLoggedInUser().then(function(user) {
