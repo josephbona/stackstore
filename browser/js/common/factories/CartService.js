@@ -55,7 +55,9 @@ app.factory('CartService', function($state, $rootScope, $http, AuthService, Sess
 				_cart.splice(idx, 1, result.data);
 				return _cart;
 			});
-		}
+		}, 
+
+		
 
 
 	};
