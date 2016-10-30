@@ -15,14 +15,13 @@
 					    <span class="amount"><sup>$</sup>{{product.price}}<sup>00</sup></span>
 					    <!-- <span class="label">On Sale</span> -->
 					  </div>
-						<div class="reviews">
+					  	<div ng-show='notEnoughReviews'>
+					  		<span> Be the first to leave a review below! </span>
+					  	</div>
+						<div class="reviews" ng-show='!notEnoughReviews'>
 							Avg customer rating:
 						  <span class="stars">
-						    <i class="fa fa-star"></i>
-						    <i class="fa fa-star"></i>
-						    <i class="fa fa-star"></i>
-						    <i class="fa fa-star"></i>
-						    <i class="fa fa-star-half-o"></i>
+						    <i class="fa fa-star" ng-repeat='i in getNumber(avgRating) track by $index'></i>
 						  </span>
 						  <span class="number">25 Reviews</span>
 						</div>
