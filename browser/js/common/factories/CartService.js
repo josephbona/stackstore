@@ -59,7 +59,13 @@ app.factory('CartService', function($state, $rootScope, $http, AuthService, Sess
 			});
 		}, 
 
-		
+		updateOrderStatus: function(orderId){
+			return $http.put('/api/orders/' + orderId)
+			.then(function(result){
+				angular.copy(result.data, _cart); 
+				return _cart; 
+			});
+		}
 
 
 	};

@@ -29,6 +29,16 @@ app.factory('UserService', function($http){
           _user = result.data;
           return _user; 
         });
+    }, 
+
+    //not complete
+    updateShippingAddress: function(address){
+      return $http.put('/api/users/')
+    }, 
+
+    //not complete
+    updateBillingAddress: function(){
+
     }
   };
 });
