@@ -22,20 +22,23 @@ app.directive('header', function($rootScope, AuthService, AUTH_EVENTS, $state, C
         });
       };
 
-      $rootScope.$on('cartChange', function (event, _cart){
-        console.log('cartChange Broadcast received.  _cart = ', _cart)
-        scope.lineitems =  _cart;
-        $state.go('home');
-      })
+
+      $rootScope.$on('cartChange', function (event, Cart, StateChange){
+        scope.lineItems =  Cart.line_items;
+        if (!StateChange){
+          $state.go('cart');
+        }
+         
+      }); 
 
       var setUser = function() {
         AuthService.getLoggedInUser().then(function(user) {
           scope.user = user;
           if (scope.user){
-            CartService.findByUserId(scope.user.id)
+            CartService.findByUserId(scope.user.id, false)
             .then(function(cart) {
               if (cart){
-                scope.lineItems = cart.line_items;
+                $state.go('home');
               }
             })
             .catch(function(err) {

@@ -12,14 +12,15 @@ app.factory('CartService', function($state, $rootScope, $http, AuthService, Sess
 			if (product){
 				_cart.line_items.push(product);
 			}
-			$rootScope.$broadcast('cartChange', _cart);
-			return _cart;
+			// $rootScope.$broadcast('cartChange', _cart);
+			return _cart; 
 		},
 
-		findByUserId: function(userId){
+		findByUserId: function(userId, stateChange){
 			return $http.post('/api/users/' + userId + '/orders')
 				.then(function(result){
 					angular.copy(result.data, _cart);
+					$rootScope.$broadcast('cartChange', result.data, stateChange);
 					return _cart;
 				});
 		},
@@ -44,6 +45,7 @@ app.factory('CartService', function($state, $rootScope, $http, AuthService, Sess
 			return $http.delete('/api/line_items/' + lineItem.id, { lineItemId: lineItem.id } )
 			.then(function(){
 				 _cart.line_items.splice(index,1);
+				 $rootScope.$broadcast('cartChange', _cart);
 				return _cart;	
 			});
 		},
