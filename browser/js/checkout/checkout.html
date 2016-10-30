@@ -1,0 +1,46 @@
+<div class="container">
+
+	<div class="section-header">
+		<h1 class="title text-center">Shipping Address</h1>
+	</div>
+	{{ user.shipping_address}}
+	<a>Edit</a>
+	<br>
+
+	<div class="section-header">
+		<h1 class="title text-center">Billing Address</h1>
+	</div>
+	{{ user.billing_address }}
+	<a>Edit</a>
+	<br>
+
+	<div class="section-header">
+		<h1 class="title text-center">Payment Method</h1>
+	</div>
+	<form>
+	Card Number <input></input>
+	Name on Card <input></input>
+	Expiration Date <input></input>
+	</form>
+	<br>
+
+
+	  <div class="row">
+	    <div class="col-md-12">
+	      <div class="section-header">
+	        <h1 class="title text-center">Review Order</h1>
+	      </div>
+
+			<cart></cart>
+
+	        <div class="checkout-button">
+	          <a ng-click="placeOrder(cart.id)" class="btn btn-primary btn-block">Place Your Order</a>
+	        </div>
+	      </div>
+	      <div ng-if="!lineItems[0]" class="well">
+	        <p class="no-cart">Nothing in your shopping cart.</h3>
+	      </div>
+	    </div>
+	  </div>
+
+</div>
