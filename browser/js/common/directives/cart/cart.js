@@ -32,15 +32,15 @@ app.controller('CartCtrl', function ($rootScope, $scope, CartService, ProductSer
   //if we have a logged in user get their cart
  
   if (Session.user){
-    CartService.findByUserId(Session.user.id)
-      .then(function(cart) {
-        if (cart){
-          $scope.lineItems = cart.line_items;
-        }
-      })
-      .catch(function(err) {
-        console.error(err);
-      });
+    // CartService.findByUserId(Session.user.id)
+    //   .then(function(cart) {
+    //     if (cart){
+    //       $scope.lineItems = cart.line_items;
+    //     }
+    //   })
+    //   .catch(function(err) {
+    //     console.error(err);
+    //   });
   } 
   //if we don't have a logged in user we need to get their cart... and the line item info
   // so i need the Product Service
@@ -65,33 +65,30 @@ app.controller('CartCtrl', function ($rootScope, $scope, CartService, ProductSer
       }
   }
 
+
   $scope.getCartTotal = function() {
     var total = 0;
-    // console.log('cart.js 94 BEFORE: lineItems = ', $scope.lineItems )
     for (var i = 0; i < $scope.lineItems.length; i++) {
-      // console.log('cart.js 94 lineItems = ', $scope.lineItems[i], i )
        total += ($scope.lineItems[i].product.price*1) * ($scope.lineItems[i].quantity);
     }
     return total;
   }
 
   $rootScope.$on(AUTH_EVENTS.loginSuccess, function(){
-      //console.log('in cart.js loginsuccess broadcast received ')
-      CartService.findByUserId(Session.user.id)
-      .then(function(cart) {
-        if (cart){
-          $scope.lineItems = cart.line_items;
-        }
-      })
-      .catch(function(err) {
-        console.error(err);
-      })
+      // console.log('in cart.js loginsuccess broadcast received ')
+ 
       });
     
   $rootScope.$on(AUTH_EVENTS.logoutSuccess, function(){
-    //console.log('in cartjs logOUT broadcast received ')
+    // console.log('in cartjs logOUT broadcast received ')
     localStorageService.set('cart', []);
     $scope.lineItems = [];
   });
 
 })
+
+
+
+
+
+
