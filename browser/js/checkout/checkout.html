@@ -3,25 +3,27 @@
 	<div class="section-header">
 		<h1 class="title text-center">Shipping Address</h1>
 	</div>
-	{{ user.shipping_address}}
-	<a>Edit</a>
+	<a href="#" editable-text="user.shipping_address" onaftersave="updateShippingAddress(user.shipping_address)">
+		{{ user.shipping_address}}
+	</a>
 	<br>
 
 	<div class="section-header">
 		<h1 class="title text-center">Billing Address</h1>
 	</div>
-	{{ user.billing_address }}
-	<a>Edit</a>
+	<a href="#" editable-text="user.billing_address" onaftersave="updateBillingAddress()">
+		{{ user.billing_address }}
+	</a>
 	<br>
 
 	<div class="section-header">
 		<h1 class="title text-center">Payment Method</h1>
 	</div>
-	<form>
-	Card Number <input></input>
-	Name on Card <input></input>
-	Expiration Date <input></input>
-	</form>
+	<div class="input-group">
+		Card Number <input type="text"></input>
+		Name on Card <input type="text" value="{{ user.name }}"></input>
+		Expiration Date <input type="text" placeholder="MM/YYYY"></input>
+	</div>
 	<br>
 
 
@@ -34,7 +36,7 @@
 			<cart></cart>
 
 	        <div class="checkout-button">
-	          <a ng-click="placeOrder(cart.id)" class="btn btn-primary btn-block">Place Your Order</a>
+	          <a ng-click="updateOrderStatus(cart.id)" class="btn btn-primary btn-block">Place Your Order</a>
 	        </div>
 	      </div>
 	      <div ng-if="!lineItems[0]" class="well">

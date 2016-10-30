@@ -6,10 +6,6 @@ app.config(function ($stateProvider) {
 	        controller: 'CartCtrl',
 	        templateUrl: 'js/checkout/checkout.html' 
 	    });
-	    // .state('checkoutSuccess', {
-	    // 	url: 
-	    // })
-
 });
 
 

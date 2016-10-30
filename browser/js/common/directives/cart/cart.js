@@ -6,15 +6,31 @@ app.directive('cart', function(){
 }); 
 
 
-//Master Controller 
-app.controller('CartCtrl', function ($rootScope, $scope, CartService, ProductService, Session, localStorageService, AuthService, AUTH_EVENTS) {
+app.controller('CartCtrl', function ($rootScope, $scope, CartService, ProductService, Session, localStorageService, AuthService, AUTH_EVENTS, $timeout, $state, UserService) {
   
   $scope.user = Session.user;
   
-  $scope.placeOrder = function(cartId){
-    console.log('cart id here', cartId);
+  //not complete
+  $scope.updateShippingAddress = function(){
+    console.log('update shipping');
+    UserService.updateShippingAddress(address)
+      .then(function(user){
+        $scope.user.shipping_address = user.shipping_address;
+      })
   };
 
+  // not complete
+  $scope.updateBillingAddress = function(){
+    console.log('update billing')
+  }; 
+
+  $scope.updateOrderStatus = function(cartId){
+    console.log('cart id here', cartId);
+    CartService.updateOrderStatus(cartId)
+      .then(function(order){
+          $state.go('user');
+      })
+  };
 
   $scope.cart = CartService.cart;
   $rootScope.lineItems = $scope.lineItems 

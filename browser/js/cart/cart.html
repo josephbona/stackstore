@@ -5,9 +5,9 @@
         <h1 class="title text-center">Shopping Cart</h1>
       </div>
 
-		<cart></cart>
+		  <cart></cart>
 
-        <div class="checkout-button">
+        <div ng-if="lineItems[0]" class="checkout-button">
           <a ui-sref="checkout" class="btn btn-primary btn-block">Checkout</a>
         </div>
       </div>
