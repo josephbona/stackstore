@@ -55,7 +55,9 @@ app.factory('CartService', function($http, AuthService, Session, localStorageSer
 				_cart.splice(idx, 1, result.data);
 				return _cart;
 			});
-		}
+		}, 
+
+		
 
 
 	};

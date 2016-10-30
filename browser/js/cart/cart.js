@@ -8,7 +8,7 @@ app.config(function ($stateProvider) {
       //     return  Session.user;
       //   },
 
-      }
+      // }
   });
 });
 

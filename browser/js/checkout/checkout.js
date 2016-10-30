@@ -1,12 +1,14 @@
 app.config(function ($stateProvider) {
 
-    // Register our *checkout* state.
-    $stateProvider.state('checkout', {
-        url: '/checkout',
-        // controller: 'CartCtrl',
-        templateUrl: 'js/checkout/checkout.html'   
-
-    });
+    $stateProvider
+    	.state('checkout', {
+	        url: '/checkout',
+	        controller: 'CartCtrl',
+	        templateUrl: 'js/checkout/checkout.html' 
+	    });
+	    // .state('checkoutSuccess', {
+	    // 	url: 
+	    // })
 
 });
 
@@ -14,11 +16,15 @@ app.config(function ($stateProvider) {
 
 
 
-// app.controller('CheckoutController', function ($scope, UserService, Session, CartService) {
+// app.controller('CheckoutCtrl', function ($scope, user, UserService, Session, CartService) {
 
-// 	$scope.user = Session.user;
-// 	$scope.cart = CartService.cart.line_items; 
-// 	console.log(CartService.cart);
-// 	console.log(CartService.cart.line_items[0])
+// 	// $scope.user = AuthService.getLoggedInUser();
+// 	// console.log($scope.user);
+// 	$scope.user = user;
+// 	console.log($scope.user);
+
+// 	// $scope.cart = CartService.cart.line_items; 
+// 	// console.log(CartService.cart);
+// 	// console.log(CartService.cart.line_items[0])
 
 // });
