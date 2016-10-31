@@ -7,9 +7,13 @@
 
 		  <cart></cart>
 
-        <div ng-if="lineItems[0]" class="checkout-button">
+        <div ng-if="lineItems[0] && user" class="checkout-button">
           <a ui-sref="checkout" class="btn btn-primary btn-block">Checkout</a>
         </div>
+        <div ng-if="lineItems[0] && !user" class="checkout-button">
+          <a ui-sref="register" class="btn btn-primary btn-block">Checkout</a>
+        </div>        
+
       </div>
       <div ng-if="!lineItems[0]" class="well">
         <p class="no-cart">Nothing in your shopping cart.</h3>
