@@ -15,3 +15,16 @@ admin.directive('file', function() {
     }
   };
 });
+
+admin.factory('UploadService', function($http) {
+  return {
+    getCreds: function() {
+      return $http.get('/api/env/aws')
+        .then(function(result) {
+          return result.data;
+        }).catch(function(err) {
+          console.log(err);
+        });
+    }
+  };
+});

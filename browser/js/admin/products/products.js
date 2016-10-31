@@ -14,6 +14,9 @@ admin.config(function($stateProvider) {
     resolve: {
       categories: function(CategoryService) {
         return CategoryService.findAll();
+      },
+      creds: function(UploadService) {
+        return UploadService.getCreds();
       }
     },
     controller: 'AdminAddProductCtrl'
@@ -32,25 +35,10 @@ admin.controller('AdminProductsCtrl', function($scope, products) {
   $scope.products = products;
 });
 
-admin.controller('AdminAddProductCtrl', function($scope, categories, ProductService, $state) {
+admin.controller('AdminAddProductCtrl', function($scope, categories, creds, ProductService, $state, $q) {
   $scope.categories = categories;
-  $scope.addProduct = function(product) {
-    $scope.upload();
-    console.log(product);
-    return ProductService.create(product)
-      .then(function() {
-        $state.go('products');
-      })
-      .catch(function(err) {
-        console.log(err);
-      });
-  }
   $scope.sizeLimit = 2117152; // 2MB in Bytes
-  $scope.creds = {
-    bucket: 'bucket',
-    access_key: 'access_key',
-    secret_key: 'secret_key'
-  }
+  $scope.creds = creds;
 
   $scope.upload = function() {
     AWS.config.update({
@@ -104,5 +92,19 @@ admin.controller('AdminAddProductCtrl', function($scope, categories, ProductServ
       text += possible.charAt(Math.floor(Math.random() * possible.length));
     }
     return text;
+  }
+
+  $scope.addProduct = function(product) {
+    $q.resolve($scope.upload())
+      .then(function() {
+        console.log(product);
+        return ProductService.create(product);
+      })
+      .then(function() {
+        $state.go('products');
+      })
+      .catch(function(err) {
+        console.log(err);
+      });
   }
 })
