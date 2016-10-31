@@ -47,9 +47,9 @@ admin.controller('AdminAddProductCtrl', function($scope, categories, ProductServ
   }
   $scope.sizeLimit = 2117152; // 2MB in Bytes
   $scope.creds = {
-    bucket: 'fsstackstore',
-    access_key: 'AKIAJXBI2GHGAV37WPRQ',
-    secret_key: '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'
+    bucket: 'bucket',
+    access_key: 'access_key',
+    secret_key: 'secret_key'
   }
 
   $scope.upload = function() {
