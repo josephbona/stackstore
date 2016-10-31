@@ -33,9 +33,9 @@ app.factory('CartService', function($state, $rootScope, $http, AuthService, Sess
 				});
 		},
 
-		addLineItem: function(product){
+		addLineItem: function(product, quantity){
 			var that = this;
-			return $http.post('/api/line_items/' + Session.user.id + '/order/' + _cart.id + '/line_items', { quantity: 1, productId: product.id} )
+			return $http.post('/api/line_items/' + Session.user.id + '/order/' + _cart.id + '/line_items', { quantity: quantity, productId: product.id} )
 				.then(function(result){
 					return that.findByUserId(Session.user.id)
 				});

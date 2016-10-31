@@ -58,7 +58,7 @@ app.controller('ProductController', function (user, avgRating, $scope, product, 
         else
         {
         //if we have a user create a line item
-        return CartService.addLineItem(product)
+        return CartService.addLineItem(product, $scope.quantity)
         .then(function(cart){
           $scope.cart = cart;
         })
