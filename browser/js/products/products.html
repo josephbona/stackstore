@@ -12,12 +12,21 @@
       <aside class="col-md-2 sidebar">
         <br>
         <div class="list-group">
-          <a ng-repeat="category in categories" ng-click="filterByCategory(category.id)" class="list-group-item">{{ category.name }}</a>
+          <a ng-click="findAll()" class="list-group-item">All Products</a>        
+          <a ng-repeat="category in categories" ng-click="filterByCategory(category)" class="list-group-item">{{ category.name }}</a>
         </div>
+
+        <div class="list-group">
+          <a ng-click="filterByPrice(0,50)" class="list-group-item">$0 - $50</a>
+          <a ng-click="filterByPrice(50,100)" class="list-group-item">$50 - $100</a>
+          <a ng-click="filterByPrice(100,200)" class="list-group-item">$100 - $200</a>
+          <a ng-click="filterByPrice(200,1000)" class="list-group-item">$200 - $1000</a>
+        </div>
+
       </aside>
       <div class="col-md-10">
         <div class="section-header">
-          <h1 class="title pull-left">All Products</h1>
+          <h1 class="title pull-left">{{ currentCategory }}</h1>
         </div>
         <product-list products="products"></product-list>
       </div>
