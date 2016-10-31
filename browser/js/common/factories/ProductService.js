@@ -22,6 +22,14 @@ app.factory('ProductService', function($http){
 			})
 		},
 
+		filterByPrice: function(min, max){
+			return $http.get('/api/products/' + min + '/' + max)
+			.then(function(result){
+				console.log('result.data', result.data)
+				return result.data;
+			})
+		},
+
 		findById: function(id){
 			return $http.get('/api/products/' + id)
 			.then(function(result){

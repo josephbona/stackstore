@@ -16,4 +16,16 @@ app.config(function ($stateProvider) {
 
 app.controller('UserController', function ($scope, UserService, user) {
 	$scope.user = user;
+
+    $scope.save = function(){
+        return UserService.update($scope.user)
+            .then(function(success){
+                $scope.saved = true;
+            })
+            .catch(function(err){
+                $scope.error = true;
+                console.log(err);
+            });
+    }; 
+
 });

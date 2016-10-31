@@ -28,15 +28,6 @@
       font-size: 12px;
     }
   }
-  .stars {
-    display: inline-block;
-    position: relative;
-    color: #e5c649;
-    margin-right: 8px;
-    .rating {
-      position: absolute;
-    }
-  }
   .add-to-cart {
     margin: 20px 0;
     .quantity-control {
@@ -55,3 +46,12 @@
     }
   }
 }
+.stars {
+    display: inline-block;
+    position: relative;
+    color: #e5c649;
+    margin-right: 8px;
+    .rating {
+      position: absolute;
+    }
+  }

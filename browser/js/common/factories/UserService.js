@@ -9,6 +9,7 @@ app.factory('UserService', function($http){
     create: function(user){
       return $http.post('/api/users', user)
       .then(function(result){
+        angular.copy(result.data, _user); 
         return result.data;
       });
     },
@@ -16,9 +17,28 @@ app.factory('UserService', function($http){
     findById: function(id){
     	return $http.get('/api/users/' + id)
     	.then(function(result){
-    		_user = result.data;
+        angular.copy(result.data, _user);
+    		// _user = result.data;
     		return _user;
     	});
+    },
+
+    update: function(userInfo){
+      return  $http.put('/api/users/' + userInfo.id, userInfo)
+        .then(function(result){
+          _user = result.data;
+          return _user; 
+        });
+    }, 
+
+    //not complete
+    updateShippingAddress: function(address){
+      return $http.put('/api/users/')
+    }, 
+
+    //not complete
+    updateBillingAddress: function(){
+
     }
   };
 });

@@ -1,15 +1,18 @@
 const router = require('express').Router();
 const Product = require('../../db').models.Product;
 const Category = require('../../db').models.Category;
+const Review = require('../../db').models.Review;
 
 module.exports = router;
 
 router.get('/', function(req, res, next){
-	Product.findAll()
-		.then(function(products){
-			res.send(products);
-		})
-		.catch(next);
+	Product.findAll({
+		include: [Review]
+	})
+	.then(function(products){
+		res.send(products);
+	})
+	.catch(next);
 });
 
 router.get('/:id', function(req, res, next){
@@ -18,10 +21,24 @@ router.get('/:id', function(req, res, next){
 		where: {
 			id: req.params.id
 		},
-		include: [Category]
+		include: [Category, Review]
 	})
 		.then(function(product){
 			res.send(product);
+		})
+		.catch(next);
+});
+
+router.get('/:min/:max', function(req, res, next){
+	console.log(req.params.min, req.params.max)
+	Product.findAll({
+		where: {
+			price: { between: [req.params.min, req.params.max]}
+		}
+	})
+		.then(function(products){
+			console.log(products);
+			res.send(products);
 		})
 		.catch(next);
 });

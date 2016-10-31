@@ -2,6 +2,8 @@
 var router = require('express').Router(); // eslint-disable-line new-cap
 module.exports = router;
 
+console.log('using index.js in routes')
+
 router.use('/members', require('./members'));
 router.use('/products', require('./products'));
 router.use('/users', require('./users'));

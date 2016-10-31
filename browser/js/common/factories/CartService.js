@@ -1,25 +1,26 @@
-app.factory('CartService', function($http, AuthService, Session, localStorageService){
+app.factory('CartService', function($state, $rootScope, $http, AuthService, Session, localStorageService){
 
-	var _cart = [];
+	var _cart = { line_items: [] };	
+	// _cart.line_items = localStorageService.get('cart');
+
 
 	return {
 
 		cart: _cart,
 
-		loggedOutCart: function(id){
-			if (localStorageService.get('cart')){
-					_cart = localStorageService.get('cart');
+		loggedOutCart: function(product){		
+			if (product){
+				_cart.line_items.push(product);
 			}
-			if (id){
-				_cart.push(id);
-			}
-			return localStorageService.set('cart', _cart);
+			// $rootScope.$broadcast('cartChange', _cart);
+			return _cart; 
 		},
 
-		findByUserId: function(userId){
+		findByUserId: function(userId, stateChange){
 			return $http.post('/api/users/' + userId + '/orders')
 				.then(function(result){
 					angular.copy(result.data, _cart);
+					$rootScope.$broadcast('cartChange', result.data, stateChange);
 					return _cart;
 				});
 		},
@@ -32,19 +33,20 @@ app.factory('CartService', function($http, AuthService, Session, localStorageSer
 				});
 		},
 
-		addLineItem: function(product){
-			return $http.post('/api/line_items/' + Session.user.id + '/order/' + _cart.id + '/line_items', { quantity: 1, productId: product.id} )
+		addLineItem: function(product, quantity){
+			var that = this;
+			return $http.post('/api/line_items/' + Session.user.id + '/order/' + _cart.id + '/line_items', { quantity: quantity, productId: product.id} )
 				.then(function(result){
-					_cart.push(result.data);
-					return _cart;
+					return that.findByUserId(Session.user.id)
 				});
 		},
 
-		destroy: function(lineItem){
-			return $http.destroy('/api/line_items/' + lineItem.id)
+		destroy: function(lineItem, index){
+			return $http.delete('/api/line_items/' + lineItem.id, { lineItemId: lineItem.id } )
 			.then(function(){
-				var idx = _cart.indexOf(lineItem);
-				_cart.splice(idx,1);
+				 _cart.line_items.splice(index,1);
+				 $rootScope.$broadcast('cartChange', _cart);
+				return _cart;	
 			});
 		},
 
@@ -55,17 +57,22 @@ app.factory('CartService', function($http, AuthService, Session, localStorageSer
 				_cart.splice(idx, 1, result.data);
 				return _cart;
 			});
+		}, 
+
+		updateOrderStatus: function(orderId){
+			return $http.put('/api/orders/' + orderId)
+			.then(function(result){
+				angular.copy(result.data, _cart); 
+				return _cart; 
+			});
 		}
 
 
 	};
 
 })
-.run(function(CartService, $rootScope, AUTH_EVENTS, Session){
-	$rootScope.$on(AUTH_EVENTS.loginSuccess, function(){
-		CartService.findByUserId(Session.user.id);
-	});
-});
+
+
 
 
 

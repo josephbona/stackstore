@@ -26,9 +26,10 @@ router.get('/', function(req, res, next){
 });
 
 router.get('/:id', function(req, res, next){
-	User.findById(req.params.id)
+	User.findById(req.params.id, {
+		include: [Order]
+	})
 		.then(function(user){
-			console.log(user);
 			res.send(user);
 		})
 		.catch(next);
@@ -65,11 +66,7 @@ router.post('/', function(req, res, next){
 router.put('/:id', function(req, res, next){
 	User.findById(req.params.id)
 		.then(function(user){
-			//assumes req.body has email, password etc. would be great to just get the object to save instead
-			user.email = req.body.email;
-			user.password = req.body.password;
-
-			user.save()
+			user.update(req.body)
 				.then(function(user){
 					res.send(user);
 				});

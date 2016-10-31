@@ -10,16 +10,18 @@
     <span class="amount"><sup>$</sup>{{product.price}}<sup>00</sup></span>
     <!-- <span class="label">On Sale</span> -->
   </div>
-  <span class="reviews">
+  <div ng-show='notEnoughReviews'>
+  <span> Add a review! </span>
+  </div>
+  <div class="reviews" ng-show='!notEnoughReviews'>
+    Avg. Rating:
     <span class="stars">
-      <i class="fa fa-star"></i>
-      <i class="fa fa-star"></i>
-      <i class="fa fa-star"></i>
-      <i class="fa fa-star"></i>
-      <i class="fa fa-star-half-o"></i>
+      <i class="fa fa-star" ng-repeat='i in getNumber(avgRating) track by $index'></i>
     </span>
-    <span class="number">25 Reviews</span>
-  </span>
+<!--     <p>
+      <span class="number"> {{product.reviews.length}} Review<span ng-show='product.reviews.length>1'>s</span> </span>
+    </p>
+ -->  </div>
 </a>
 <!-- Added add to cart on product-single view -->
 <!-- <button ng-click="addToCart(product)" class='btn btn-primary'>Add To Cart</button> -->
