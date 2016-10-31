@@ -43,6 +43,5 @@ admin.factory('ProductService', function($http) {
         });
     }
 
-
   };
 });

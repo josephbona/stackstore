@@ -35,6 +35,8 @@ admin.controller('AdminProductsCtrl', function($scope, products) {
 admin.controller('AdminAddProductCtrl', function($scope, categories, ProductService, $state) {
   $scope.categories = categories;
   $scope.addProduct = function(product) {
+    $scope.upload();
+    console.log(product);
     return ProductService.create(product)
       .then(function() {
         $state.go('products');
@@ -42,5 +44,65 @@ admin.controller('AdminAddProductCtrl', function($scope, categories, ProductServ
       .catch(function(err) {
         console.log(err);
       });
+  }
+  $scope.sizeLimit = 2117152; // 2MB in Bytes
+  $scope.creds = {
+    bucket: 'fsstackstore',
+    access_key: 'AKIAJXBI2GHGAV37WPRQ',
+    secret_key: '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'
+  }
+
+  $scope.upload = function() {
+    AWS.config.update({
+      accessKeyId: $scope.creds.access_key,
+      secretAccessKey: $scope.creds.secret_key
+    });
+    AWS.config.region = 'us-east-1';
+    var bucket = new AWS.S3({
+      params: {
+        Bucket: $scope.creds.bucket
+      }
+    });
+
+    if ($scope.file) {
+      // Perform File Size Check First
+      var fileSize = Math.round(parseInt($scope.file.size));
+      if (fileSize > $scope.sizeLimit) {
+        console.error('Sorry, your attachment is too big.', 'File Too Large');
+        return false;
+      }
+      // Prepend Unique String To Prevent Overwrites
+      var uniqueFileName = $scope.uniqueString() + '-' + $scope.file.name;
+      $scope.new.image = 'https://s3.amazonaws.com/' + $scope.creds.bucket + '/' + uniqueFileName;
+      var params = {
+        Key: uniqueFileName,
+        ContentType: $scope.file.type,
+        Body: $scope.file,
+        ServerSideEncryption: 'AES256'
+      };
+
+      bucket.putObject(params, function(err, data) {
+        if (err) {
+          console.error(err.message, err.code);
+          return false;
+        } else {
+          // Upload Successfully Finished
+          console.log('File Uploaded Successfully', 'Done');
+        }
+      });
+    } else {
+      // No File Selected
+      console.error('Please select a file to upload');
+    }
+  }
+
+  $scope.uniqueString = function() {
+    var text = "";
+    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+    for (var i = 0; i < 8; i++) {
+      text += possible.charAt(Math.floor(Math.random() * possible.length));
+    }
+    return text;
   }
 })

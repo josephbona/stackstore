@@ -5,3 +5,4 @@ public/style.css
 public/main.js
 .DS_Store
 coverage
+server/env/development.js

@@ -24,6 +24,11 @@ module.exports = {
         clientSecret: process.env.GOOGLE_CLIENT_SECRET,
         callbackURL: process.env.GOOGLE_CALLBACK_URL
     },
+    AWS: {
+        bucket: process.env.AWS_BUCKET,
+        access_key: process.env.AWS_ACCESS_KEY,
+        secret_key: process.env.AWS_SECRET_KEY,
+    },
     LOGGING: true,
     NATIVE: true
 };

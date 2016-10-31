@@ -44,10 +44,7 @@ router.get('/:min/:max', function(req, res, next){
 });
 
 router.post('/', function(req, res, next){
-	Product.create({
-		name: req.body.name,
-		description: req.body.description
-	})
+	Product.create(req.body)
 	.then(function(product){
 		res.send(product);
 	})
