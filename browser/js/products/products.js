@@ -16,7 +16,6 @@ app.config(function ($stateProvider) {
 });
 
 app.controller('ProductsCtrl', function ($scope, products, categories, $state, ProductService) {
-
     $scope.products = products;
 
     $scope.categories = categories; 

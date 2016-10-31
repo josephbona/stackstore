@@ -6,11 +6,13 @@ const Review = require('../../db').models.Review;
 module.exports = router;
 
 router.get('/', function(req, res, next){
-	Product.findAll()
-		.then(function(products){
-			res.send(products);
-		})
-		.catch(next);
+	Product.findAll({
+		include: [Review]
+	})
+	.then(function(products){
+		res.send(products);
+	})
+	.catch(next);
 });
 
 router.get('/:id', function(req, res, next){

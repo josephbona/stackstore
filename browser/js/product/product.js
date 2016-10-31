@@ -30,7 +30,6 @@ app.controller('ProductController', function (user, avgRating, $scope, product, 
     if (avgRating === 0){
       $scope.notEnoughReviews = true;
     } else {
-      console.log('avgrating', avgRating);
       $scope.avgRating = avgRating; 
     }
 
@@ -40,8 +39,14 @@ app.controller('ProductController', function (user, avgRating, $scope, product, 
 
 
     $scope.addReview = function(product){
-      console.log($scope.review);
-      return ReviewService.create($scope.review, $scope.rate, product.id, $scope.user.id);
+      return ReviewService.create($scope.review, $scope.rate, product.id, $scope.user.id)
+        .then(function(review){
+          $scope.product.reviews.push(review);
+          $scope.notEnoughReviews = false; 
+        })
+        .catch(function(err){
+          console.log(err);
+        });
     };
 
     $scope.addToCart = function(product){
@@ -58,7 +63,7 @@ app.controller('ProductController', function (user, avgRating, $scope, product, 
           $scope.cart = cart;
         })
         .then(function(){
-          $state.go('cart')
+          $state.go('cart');
         })
         .catch(function(err){
           console.log(err);
