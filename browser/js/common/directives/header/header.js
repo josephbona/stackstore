@@ -35,7 +35,7 @@ app.directive('header', function($rootScope, AuthService, AUTH_EVENTS, $state, C
         AuthService.getLoggedInUser().then(function(user) {
           scope.user = user;
           if (scope.user){
-            CartService.findByUserId(scope.user.id, false)
+            CartService.getLineItems(scope.user.id, false)
             .then(function(cart) {
               if (cart){
                 $state.go('home');

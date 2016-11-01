@@ -15,56 +15,12 @@ app.controller('CartCtrl', function ($rootScope, $scope, CartService, ProductSer
     console.log('cart id here', cartId);
   };
 
+ 
+
 
   $scope.cart = CartService.cart;
   $rootScope.lineItems = $scope.lineItems 
   $scope.lineItems = $scope.cart.line_items;
-
-  $scope.destroyLineItem =  function (lineItem, index){ 
-    CartService.destroy(lineItem.lineItem, index)
-    .then(function(cart){
-      localStorageService.get('cart', cart )
-      $scope.lineItems = $scope.cart.line_items;
-    })
-
-  }
-
-  //if we have a logged in user get their cart
- 
-  if (Session.user){
-    // CartService.findByUserId(Session.user.id)
-    //   .then(function(cart) {
-    //     if (cart){
-    //       $scope.lineItems = cart.line_items;
-    //     }
-    //   })
-    //   .catch(function(err) {
-    //     console.error(err);
-    //   });
-  } 
-  //if we don't have a logged in user we need to get their cart... and the line item info
-  // so i need the Product Service
-  else 
-  {
-      if(localStorageService.get('cart')){
-        // $scope.cart = { line_items: [] };
-        // $scope.lineItems = [];
-        localStorageService.get('cart').forEach(function(item){ 
-          ProductService.findById(item.id)
-            .then(function(product){
-              $scope.cart.line_items.push({"product": product, "quantity": 2 , "id": item.id})
-             
-              // return $scope.cart.line_items;
-            })
-            .then(function (line_items){
-              $scope.lineItems = line_items;
-              return $scope.lineItems;
-            })
-
-        });
-      }
-  }
-
 
   $scope.getCartTotal = function() {
     var total = 0;
@@ -72,23 +28,50 @@ app.controller('CartCtrl', function ($rootScope, $scope, CartService, ProductSer
        total += ($scope.lineItems[i].product.price*1) * ($scope.lineItems[i].quantity);
     }
     return total;
+  };
+
+  $scope.destroyLineItem =  function (lineItem, index){ 
+
+    console.log('lineItem.lineItem = ', lineItem) 
+    CartService.destroy(lineItem.lineItem, index)
+    .then(function(cart){
+      console.log('cart = ', cart)
+      localStorageService.get('cart', cart )
+      $scope.lineItems = cart.line_items;
+    })
+
+  };
+
+
+
+// console.log('loggedInUser = ', loggedInUser)
+  if (Session.user){
+    //Initialize localStorageService
+    localStorageService.set('cart', {});
+    console.log('cart.js: return stuff')
+    CartService.getLineItems(Session.user.id)
+    .then(function(cart){
+      console.log('cart = ', cart)
+      $scope.lineItems = cart.line_items;
+    })
+  } else {
+    console.log('cart.js: return Different stuff')
+     CartService.getLineItems()
+    .then(function(cart){
+      console.log('cart.js:  Cart =', cart)
+      $scope.lineItems = cart.line_items;
+    })
   }
 
-  $rootScope.$on(AUTH_EVENTS.loginSuccess, function(){
-      // console.log('in cart.js loginsuccess broadcast received ')
- 
-      });
-    
   $rootScope.$on(AUTH_EVENTS.logoutSuccess, function(){
-    // console.log('in cartjs logOUT broadcast received ')
+    console.log('in cartjs logOUT broadcast received ')
     localStorageService.set('cart', []);
+    $scope.cart.line_items = [];
     $scope.lineItems = [];
+    console.log('$scope.lineItems = ', $scope.lineItems)
+    console.log('$scope.cart.line_items', $scope.cart.line_items)
+    console.log('localStorageService.get = ', localStorageService.get)
   });
-
-})
-
-
-
-
-
+});
+  
 
