@@ -53,11 +53,11 @@ app.controller('CarouselCtrl', function ($scope) {
   var slides = $scope.slides = [
     {
       id: 0,
-      image: 'http://localhost:1337/images/slide1.jpg',
+      image: 'https://s3.amazonaws.com/fsstackstore/slide1.jpg',
     },
     {
       id: 1,
-      image: 'http://localhost:1337/images/slide2.jpg',
+      image: 'https://s3.amazonaws.com/fsstackstore/slide2.jpg',
     }
   ];
 });
