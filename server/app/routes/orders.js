@@ -52,7 +52,7 @@ router.post('/', function(req, res, next){
 router.put('/:id', function(req, res, next){
 	Order.findById(req.params.id)
 		.then(function(order){
-			order.status = 'complete'; 
+			order.status = 'pending'; 
 			order.save()
 				.then(function(order){
 					res.send(order)
