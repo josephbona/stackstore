@@ -22,10 +22,7 @@ app.controller('ProductController', function (user, avgRating, $scope, product, 
   $scope.showReviewForm = false; 
   $scope.user = user;
   $scope.max = 5;
-
-  $scope.ratingStates = [
-    //{stateOn: 'fa-star', stateOff: 'fa-star-o'}
-    ]; 
+  $scope.submitted = false; 
 
     if (avgRating === 0){
       $scope.notEnoughReviews = true;
@@ -41,6 +38,7 @@ app.controller('ProductController', function (user, avgRating, $scope, product, 
     $scope.addReview = function(product){
       return ReviewService.create($scope.review, $scope.rate, product.id, $scope.user.id)
         .then(function(review){
+          $scope.submitted = true; 
           $scope.product.reviews.push(review);
           $scope.notEnoughReviews = false; 
         })
