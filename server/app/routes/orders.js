@@ -4,6 +4,17 @@ const Product = require('../../db').models.Product;
 const Order = require('../../db').models.Order;
 
 module.exports = router;
+router.get('/complete/:id', function(req, res, next) {
+	Order.findById(req.params.id)
+		.then(function(order){
+			order.status = 'complete';
+			order.save()
+				.then(function(order){
+					res.send(order)
+				})
+		})
+		.catch(next);
+});
 
 router.get('/', function(req, res, next){
 	if(req.query.status) {
@@ -52,7 +63,7 @@ router.post('/', function(req, res, next){
 router.put('/:id', function(req, res, next){
 	Order.findById(req.params.id)
 		.then(function(order){
-			order.status = 'pending'; 
+			order.status = 'pending';
 			order.save()
 				.then(function(order){
 					res.send(order)

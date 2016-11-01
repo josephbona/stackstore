@@ -11,11 +11,17 @@ admin.config(function($stateProvider) {
   });
 });
 
-admin.controller('DashboardCtrl', function($scope, ProductService, UserService) {
+admin.controller('DashboardCtrl', function($scope, ProductService, UserService, OrderService) {
   ProductService.findAll().then(function(products) {
     $scope.productCount = products.length;
   });
   UserService.findAll().then(function(users) {
     $scope.userCount = users.length;
-  })
+  });
+  OrderService.findPending().then(function(orders) {
+    $scope.pendingCount = orders.length;
+  });
+  $scope.completeOrder = function(id) {
+    return OrderService.completeOrder(id);
+  }
 });

@@ -55,16 +55,24 @@ function OrdersTableCtrl(DTOptionsBuilder, DTColumnBuilder, OrderService) {
       .withPaginationType('simple_numbers')
       .withBootstrap();
 
+    function completeOrder(id) {
+      return OrderService.completeOrder(id);
+    }
+    vm.completeOrder = completeOrder;
+
     vm.dtColumns = [
       DTColumnBuilder.newColumn('id').withTitle('ID'),
       DTColumnBuilder.newColumn('status').withTitle('Status'),
       DTColumnBuilder.newColumn('userId').withTitle('User ID'),
       DTColumnBuilder.newColumn(null).withTitle('Action').notSortable()
       .renderWith(function(data, type, full, meta) {
-        if(data.status === 'cart' ) {
-          return '<button class="btn btn-success btn-xs btn-block icon-before" ng-click="edit(' + data.id + ')"><i class="fa fa-truck"></i>Complete</button>';
+        if(data.status === 'cart') {
+          return '';
+        }
+        else if(data.status === 'pending' ) {
+          return '<button class="btn btn-success btn-xs btn-block icon-before" ng-click="completeOrder(' + data.id + ')"><i class="fa fa-truck"></i>Complete</button>';
         } else {
-          return '<button class="btn btn-default btn-xs btn-block icon-before" ng-click="edit(' + data.id + ')"><i class="fa fa-check"></i>Completed</button>';
+          return '<button class="btn btn-default btn-xs btn-block icon-before"><i class="fa fa-check"></i>Completed</button>';
         }
       })
     ];
@@ -86,10 +94,18 @@ function UsersTableCtrl(DTOptionsBuilder, DTColumnBuilder, UserService) {
       DTColumnBuilder.newColumn(null).withTitle('Action').notSortable()
       .renderWith(function(data, type, full, meta) {
         if(data.role === 'admin') {
-          return '<button class="btn btn-default btn-xs btn-block icon-before" ng-click="edit(' + data.id + ')"><i class="fa fa-unlock-alt"></i>Remove Admin</button>';
+          return '<button class="btn btn-default btn-xs btn-block icon-before" ng-click="removeAdmin(' + data.id + ')"><i class="fa fa-unlock-alt"></i>Remove Admin</button>';
         } else {
-          return '<button class="btn btn-success btn-xs btn-block icon-before" ng-click="edit(' + data.id + ')"><i class="fa fa-lock"></i>Make Admin</button>';
+          return '<button class="btn btn-success btn-xs btn-block icon-before" ng-click="makeAdmin(' + data.id + ')"><i class="fa fa-lock"></i>Make Admin</button>';
         }
       })
     ];
+    function makeAdmin(id) {
+      console.log(id + ' make addming')
+    }
+    vm.makeAdmin = makeAdmin;
+
+    vm.removeAdmin = function(id) {
+        return UserService.removeAdmin(id);
+    }
 }
