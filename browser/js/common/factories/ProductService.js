@@ -1,10 +1,9 @@
 app.factory('ProductService', function($http){
 
 	var _product = {};
+	var searchResults = {};
 
 	return {
-
-		//product: _product,
 
 		findAll: function(){
 			return $http.get('/api/products')
@@ -19,15 +18,28 @@ app.factory('ProductService', function($http){
 			return $http.get('/api/categories/' + categoryId)
 			.then(function(result){
 				return result.data;
-			})
+			});
 		},
 
 		filterByPrice: function(min, max){
 			return $http.get('/api/products/' + min + '/' + max)
 			.then(function(result){
-				console.log('result.data', result.data)
+				console.log('result.data', result.data);
 				return result.data;
-			})
+			});
+		},
+
+		search: function(term){
+			return $http.post('/api/products/search', { term: term })
+				.then(function(result){
+					searchResults.data = result.data;
+					searchResults.term = term;
+					return searchResults;
+				});
+		},
+
+		getSearchResults: function(){
+			return searchResults;
 		},
 
 		findById: function(id){

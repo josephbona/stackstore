@@ -10,8 +10,8 @@
       </div>
       <div class="header-row">
         <div class="header-col-7">
-          <form class="search">
-            <input type="search" placeholder="Search all products...">
+          <form class="search" ng-submit='search()'>
+            <input ng-model='searchTerm' type="search" placeholder="Search all products...">
             <button type="submit" class="submit">
               <i class="icon icon-magnifying-glass"></i>
             </button>

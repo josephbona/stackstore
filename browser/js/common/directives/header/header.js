@@ -1,4 +1,4 @@
-app.directive('header', function($rootScope, AuthService, AUTH_EVENTS, $state, CartService, localStorageService ) {
+app.directive('header', function($rootScope, AuthService, AUTH_EVENTS, $state, CartService, localStorageService, ProductService ) {
 
   return {
     restrict: 'E',
@@ -8,7 +8,16 @@ app.directive('header', function($rootScope, AuthService, AUTH_EVENTS, $state, C
 
       scope.user = null;
 
-    
+      scope.search = function(){
+        return ProductService.search(scope.searchTerm)
+          .then(function(results){
+            console.log('results', results);
+            $state.go('searchResults', { results: results });
+          })
+          .catch(function(err){
+            console.log(err);
+          });
+      };
 
       scope.isLoggedIn = function() {
         return AuthService.isAuthenticated();
