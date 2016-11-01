@@ -43,6 +43,20 @@ router.get('/:min/:max', function(req, res, next){
 		.catch(next);
 });
 
+router.post('/search', function(req, res, next){
+	Product.findAll({
+		where: {
+			name: {
+				$ilike: '%' + req.body.term + '%' 
+			}
+		}
+	})
+	.then(function(products){
+		res.send(products);
+	})	
+	.catch(next);
+});
+
 router.post('/', function(req, res, next){
 	Product.create(req.body)
 	.then(function(product){
