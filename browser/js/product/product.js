@@ -40,7 +40,11 @@ app.controller('ProductController', function (user, avgRating, $scope, product, 
         .then(function(review){
           $scope.submitted = true; 
           $scope.product.reviews.push(review);
-          $scope.notEnoughReviews = false; 
+          $scope.notEnoughReviews = false;
+          return ReviewService.findAverage(product.id)
+            .then(function(avg){
+              $scope.avgRating = avg;
+            });  
         })
         .catch(function(err){
           console.log(err);
