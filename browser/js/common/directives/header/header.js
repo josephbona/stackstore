@@ -37,7 +37,6 @@ app.directive('header', function($rootScope, AuthService, AUTH_EVENTS, $state, C
         // if (!StateChange){
         //   $state.go('cart');
         // }
-        
       }); 
 
       var setUser = function() {
