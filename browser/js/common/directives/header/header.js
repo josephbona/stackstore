@@ -25,8 +25,9 @@ app.directive('header', function($rootScope, AuthService, AUTH_EVENTS, $state, C
 
       scope.logout = function() {
         AuthService.logout().then(function() {
-          localStorageService.set('cart.line_items', [] );
+          localStorageService.set('cart', [] );
           scope.lineItems = [];
+          scope.cart = {};
           $state.go('home');
         });
       };

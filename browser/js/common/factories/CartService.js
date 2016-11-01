@@ -1,11 +1,7 @@
 app.factory('CartService', function($state, $rootScope, $http, AuthService, Session, ProductService, localStorageService, $q){
 
 	var _cart = { line_items: [] };	
-	// _cart.line_items = localStorageService.get('cart');
-
-	//console.log('CartService.  Here is the LoggedInUser: ', LoggedInUser)
-
-
+	
 	return {
 
 		cart: _cart,
@@ -34,7 +30,6 @@ app.factory('CartService', function($state, $rootScope, $http, AuthService, Sess
 			    
 			    // Unlogged with something in local storage:
 			    if (localStorageService.get('cart').length  > 0) {
-	
 			    	_cart = { line_items: [] };
 
 			    	_cart.line_items = localStorageService.get('cart')
@@ -74,15 +69,13 @@ app.factory('CartService', function($state, $rootScope, $http, AuthService, Sess
 			} else {
 
 				//Logged out user:
-
 			    	if (product){
 			    		// var that = this
 			    		var temp;
 			    		temp = localStorageService.get('cart');
-			    		temp.push({"product": product, "quantity": 1 , "id": -1});
+			    		temp.push({"product": product, "quantity": quantity, "id": -1});
 			    		
 			    		localStorageService.set('cart', temp);
-	
 
 						//clear out cart as getLIneItems should repopulate
 						_cart.line_items = localStorageService.get('cart');
@@ -101,13 +94,11 @@ app.factory('CartService', function($state, $rootScope, $http, AuthService, Sess
 				return $http.delete('/api/line_items/' + lineItem.id, { lineItemId: lineItem.id } )
 				.then(function(){
 					_cart.line_items.splice(index,1);
-					console.log('_cart.line_items', _cart.line_items)
 					$rootScope.$broadcast('cartChange', _cart);
 					return _cart;	
 				});
 			} else {
 				_cart.line_items.splice(index,1);
-				console.log('_cart.line_items', _cart.line_items)
  				localStorageService.set('cart', _cart.line_items )
 				$rootScope.$broadcast('cartChange', _cart);
 				var deferred = $q.defer();
@@ -133,8 +124,6 @@ app.factory('CartService', function($state, $rootScope, $http, AuthService, Sess
 				return _cart; 
 			});
 		}
-
-
 	};
 
 })

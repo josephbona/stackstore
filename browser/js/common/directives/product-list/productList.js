@@ -36,24 +36,20 @@ app.directive('productArchiveItem', function() {
       };
       
       $scope.addToCart = function(product){
-        //if we don't have a user use the loggedOutCart function
-        if(!Session.user){
-          $scope.cart = CartService.loggedOutCart(product.id);
-          $state.go('cart');
-        } 
-        else 
-        {
-          return CartService.addLineItem(product)
-            .then(function(cart){
-              $scope.cart = cart;
-            })
-            .then(function(){
-              $state.go('cart');
-            })
-            .catch(function(err){
-              console.log(err);
-            });
-          } 
+        if (!$scope.quantity){
+          $scope.quantity = 1;
+        }
+        return CartService.addLineItem(product, $scope.quantity)
+        .then(function(lineItems){
+          $scope.cart = {line_items: []};
+          $scope.cart.line_items = lineItems
+        })
+        .then(function(){
+          $state.go('cart')
+        })
+        .catch(function(err){
+          console.log(err);
+        });
       };
     }
   };

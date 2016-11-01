@@ -47,11 +47,8 @@ app.controller('CartCtrl', function ($rootScope, $scope, CartService, ProductSer
   };
 
   $scope.destroyLineItem =  function (lineItem, index){ 
-
-    console.log('lineItem.lineItem = ', lineItem) 
     CartService.destroy(lineItem.lineItem, index)
     .then(function(cart){
-      console.log('cart = ', cart)
       localStorageService.get('cart', cart )
       $scope.lineItems = cart.line_items;
     })
@@ -60,33 +57,24 @@ app.controller('CartCtrl', function ($rootScope, $scope, CartService, ProductSer
 
 
 
-// console.log('loggedInUser = ', loggedInUser)
   if (Session.user){
-    //Initialize localStorageService
-    localStorageService.set('cart', {});
-    console.log('cart.js: return stuff')
+    //Clear localStorageService
+    localStorageService.set('cart', []);
     CartService.getLineItems(Session.user.id)
     .then(function(cart){
-      console.log('cart = ', cart)
       $scope.lineItems = cart.line_items;
     })
   } else {
-    console.log('cart.js: return Different stuff')
      CartService.getLineItems()
     .then(function(cart){
-      console.log('cart.js:  Cart =', cart)
       $scope.lineItems = cart.line_items;
     })
   }
 
   $rootScope.$on(AUTH_EVENTS.logoutSuccess, function(){
-    console.log('in cartjs logOUT broadcast received ')
     localStorageService.set('cart', []);
     $scope.cart.line_items = [];
     $scope.lineItems = [];
-    console.log('$scope.lineItems = ', $scope.lineItems)
-    console.log('$scope.cart.line_items', $scope.cart.line_items)
-    console.log('localStorageService.get = ', localStorageService.get)
   });
 });
   
