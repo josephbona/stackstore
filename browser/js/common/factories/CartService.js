@@ -14,17 +14,16 @@ app.factory('CartService', function($state, $rootScope, $http, AuthService, Sess
 			if (product){
 				_cart.line_items.push(product);
 			}
-			// $rootScope.$broadcast('cartChange', _cart);
 			return _cart; 
 		},
 
-		getLineItems: function(userId, stateChange){
+		getLineItems: function(userId){
 			// Logged-in user:
 			if (Session.user){
 				return $http.post('/api/users/' + userId + '/orders')
 				.then(function(result){
 					angular.copy(result.data, _cart);
-					$rootScope.$broadcast('cartChange', result.data, stateChange);
+					$rootScope.$broadcast('cartChange', result.data);
 					return _cart;
 				})
 			

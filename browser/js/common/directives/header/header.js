@@ -32,19 +32,15 @@ app.directive('header', function($rootScope, AuthService, AUTH_EVENTS, $state, C
       };
 
 
-      $rootScope.$on('cartChange', function (event, Cart, StateChange){
+      $rootScope.$on('cartChange', function (event, Cart){
         scope.lineItems =  Cart.line_items;
-        // if (!StateChange){
-        //   $state.go('cart');
-        // }
-        
       }); 
 
       var setUser = function() {
         AuthService.getLoggedInUser().then(function(user) {
           scope.user = user;
           if (scope.user){
-            CartService.getLineItems(scope.user.id, false)
+            CartService.getLineItems(scope.user.id)
             .then(function(cart) {
               if (cart){
                 $state.go('home');
