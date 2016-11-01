@@ -73,9 +73,13 @@ app.factory('CartService', function($state, $rootScope, $http, AuthService, Sess
 			    		// var that = this
 			    		var temp;
 			    		temp = localStorageService.get('cart');
+
+			    		if (!temp){
+			    			temp = [];
+			    		}
 			    		temp.push({"product": product, "quantity": quantity, "id": -1});
 			    		
-			    		localStorageService.set('cart', temp);
+			    		localStorageService.add('cart', temp);
 
 						//clear out cart as getLIneItems should repopulate
 						_cart.line_items = localStorageService.get('cart');
