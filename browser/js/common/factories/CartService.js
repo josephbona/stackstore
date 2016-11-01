@@ -62,11 +62,13 @@ app.factory('CartService', function($state, $rootScope, $http, AuthService, Sess
 				});
 		},
 
-		addLineItem: function(product){
+
+
+		addLineItem: function(product, quantity){
 			// Logged-in User:
 			if (Session.user){
 				var that = this;
-				return $http.post('/api/line_items/' + Session.user.id + '/order/' + _cart.id + '/line_items', { quantity: 1, productId: product.id} )
+				return $http.post('/api/line_items/' + Session.user.id + '/order/' + _cart.id + '/line_items', { quantity: quantity, productId: product.id} )
 				.then(function(result){
 					return that.getLineItems(Session.user.id)
 				});
@@ -125,7 +127,13 @@ app.factory('CartService', function($state, $rootScope, $http, AuthService, Sess
 			});
 		}, 
 
-		
+		updateOrderStatus: function(orderId){
+			return $http.put('/api/orders/' + orderId)
+			.then(function(result){
+				angular.copy(result.data, _cart); 
+				return _cart; 
+			});
+		}
 
 
 	};

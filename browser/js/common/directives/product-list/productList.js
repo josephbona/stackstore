@@ -17,7 +17,24 @@ app.directive('productArchiveItem', function() {
       product: '='
     },
     templateUrl: 'js/common/directives/product-list/product-archive-item.html',
-    controller: function(CartService, $scope, ProductService, $rootScope, Session, $state){
+    controller: function(CartService, $scope, ProductService, $rootScope, Session, $state, ReviewService){
+      
+      ReviewService.findAverage($scope.product.id)
+      .then(function(rating){
+        if (rating === 0){
+          $scope.notEnoughReviews = true;
+        } else {
+          $scope.avgRating = rating;
+        }
+      })
+      .catch(function(err){
+        console.log(err);
+      });
+
+      $scope.getNumber = function(n){
+        return new Array(n);
+      };
+      
       $scope.addToCart = function(product){
         //if we don't have a user use the loggedOutCart function
         if(!Session.user){

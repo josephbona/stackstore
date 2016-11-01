@@ -12,24 +12,23 @@
 						<h1 class="title">{{product.name}}</h1>
 						<div class="price">
 					    <!-- @TODO: separate price into decimal -->
-					    <span class="amount"><sup>$</sup>{{product.price}}<sup>00</sup></span>
+					    <span class="amount"><sup>$</sup>{{product.price}}</span>
 					    <!-- <span class="label">On Sale</span> -->
 					  </div>
-						<div class="reviews">
+					  	<div ng-show='notEnoughReviews'>
+					  		<span> Be the first to leave a review below! </span>
+					  	</div>
+						<div class="reviews" ng-show='!notEnoughReviews'>
 							Avg customer rating:
 						  <span class="stars">
-						    <i class="fa fa-star"></i>
-						    <i class="fa fa-star"></i>
-						    <i class="fa fa-star"></i>
-						    <i class="fa fa-star"></i>
-						    <i class="fa fa-star-half-o"></i>
+						    <i class="fa fa-star" ng-repeat='i in getNumber(avgRating) track by $index'></i>
 						  </span>
-						  <span class="number">25 Reviews</span>
+						  <span class="number"> {{product.reviews.length}} Review<span ng-show='product.reviews.length>1'>s</span> </span>
 						</div>
 						<form class="form-inline add-to-cart">
 							<div class="form-group">
 								<label for="quantity">Quantity:</label>
-								<input type="text" class="form-control quantity-control" id="quantity" placeholder="1">
+								<input type="text" ng-model='quantity' class="form-control quantity-control" id="quantity" placeholder="1">
 							</div>
 							<div class="form-group">
 								<button ng-click="addToCart(product)" class="btn btn-primary">Add To Cart</button>
@@ -50,20 +49,24 @@
 			</div>
 			<div>
 				<button ng-show='user && !showReviewForm' ng-click='showReviewForm = !showReviewForm' class='btn btn-primary'>Add Review</button>
-				<div class='panel'>	
+				<div class='panel' ng-show='!submitted'>
 					<form name='form' ng-show='showReviewForm' ng-submit='addReview(product)'>
 						<input required ng-model='review' class='form-control' placeholder='Add your review here' />
-						<span uib-rating ng-model='rate' max='max'></span>
+						<span required class='stars' uib-rating ng-model='rate' max='max'></span>
 						<button ng-disabled='form.$invalid' class='btn btn-success' type='submit'> Submit </button>
 						<button type='button' class='btn btn-danger' ng-click='showReviewForm = !showReviewForm'>Cancel</button>
 					</form>
 				</div>
-
+				<div ng-show='submitted' class='panel'>
+					<div>
+						<p> <h4> Review Submitted! </h4> </p>
+					</div>
+				</div>
 				<ul class='list-group'>
 					<li class='list-group-item' ng-repeat='review in product.reviews'>
 						<div class='panel'>
 							<div class='panel-heading'>
-								<span class="stars panel-title"> 
+								<span class="stars panel-title">
 									<i class="fa fa-star" ng-repeat='i in getNumber(review.rating) track by $index'></i>
 								</span>
 							</div>

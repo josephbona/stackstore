@@ -6,11 +6,13 @@ const Review = require('../../db').models.Review;
 module.exports = router;
 
 router.get('/', function(req, res, next){
-	Product.findAll()
-		.then(function(products){
-			res.send(products);
-		})
-		.catch(next);
+	Product.findAll({
+		include: [Review]
+	})
+	.then(function(products){
+		res.send(products);
+	})
+	.catch(next);
 });
 
 router.get('/:id', function(req, res, next){
@@ -27,11 +29,22 @@ router.get('/:id', function(req, res, next){
 		.catch(next);
 });
 
-router.post('/', function(req, res, next){
-	Product.create({
-		name: req.body.name,
-		description: req.body.description
+router.get('/:min/:max', function(req, res, next){
+	console.log(req.params.min, req.params.max)
+	Product.findAll({
+		where: {
+			price: { between: [req.params.min, req.params.max]}
+		}
 	})
+		.then(function(products){
+			console.log(products);
+			res.send(products);
+		})
+		.catch(next);
+});
+
+router.post('/', function(req, res, next){
+	Product.create(req.body)
 	.then(function(product){
 		res.send(product);
 	})

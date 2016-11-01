@@ -6,25 +6,10 @@ app.config(function ($stateProvider) {
 	        controller: 'CartCtrl',
 	        templateUrl: 'js/checkout/checkout.html' 
 	    });
-	    // .state('checkoutSuccess', {
-	    // 	url: 
-	    // })
-
 });
 
-
-
-
-
-// app.controller('CheckoutCtrl', function ($scope, user, UserService, Session, CartService) {
-
-// 	// $scope.user = AuthService.getLoggedInUser();
-// 	// console.log($scope.user);
-// 	$scope.user = user;
-// 	console.log($scope.user);
-
-// 	// $scope.cart = CartService.cart.line_items; 
-// 	// console.log(CartService.cart);
-// 	// console.log(CartService.cart.line_items[0])
-
-// });
+// For non-logged in users with a cart: 
+// Click the checkout button in the cart. 
+// If not logged in, go the the register state. 
+// After new account info is submitted, 
+//   if there are items in the local storage cart, save them in the cart factory and on the db. Then go to the checkout state. 

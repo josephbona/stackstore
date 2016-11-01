@@ -15,16 +15,12 @@ var Product = db.define('product', {
 		type: Sequelize.STRING
 	},
 	price: {
-		type: Sequelize.DECIMAL
+		type: Sequelize.STRING
 	},
 	salePrice: {
-		type: Sequelize.DECIMAL(10, 2)
+		type: Sequelize.STRING
 	},
 	quantity: {
-		type: Sequelize.INTEGER
-	},
-	// if sold by one of the users:
-	userId: {
 		type: Sequelize.INTEGER
 	}
 });

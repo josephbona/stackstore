@@ -11,6 +11,14 @@ router.get('/', function(req, res, next){
 		.catch(next);
 });
 
+router.get('/:id', function(req, res, next){
+	Review.findAll({ where: { productId: req.params.id } })
+		.then(function(reviews){
+			res.send(reviews);
+		})
+		.catch(next);
+});
+
 router.post('/', function(req, res, next){
 	Review.create({
 		rating: req.body.rating,

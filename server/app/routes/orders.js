@@ -48,3 +48,17 @@ router.post('/', function(req, res, next){
 		})
 		.catch(next);
 });
+
+router.put('/:id', function(req, res, next){
+	Order.findById(req.params.id)
+		.then(function(order){
+			order.status = 'pending'; 
+			order.save()
+				.then(function(order){
+					res.send(order)
+				})
+		})
+		.catch(next);
+})
+
+
