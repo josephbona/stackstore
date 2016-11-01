@@ -17,7 +17,13 @@ admin.factory('OrderService', function($http) {
         });
     },
     completeOrder: function(id) {
-      return $http.put('/api/orders/complete/' + id)
+      return $http.get('/api/orders/complete/' + id).
+        then(function(result) {
+          return result.data;
+        })
+        .catch(function(err) {
+          console.log(err);
+        });
     }
   }
 });

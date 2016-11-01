@@ -11,7 +11,7 @@ admin.config(function($stateProvider) {
   });
 });
 
-admin.controller('DashboardCtrl', function($scope, ProductService, UserService, OrderService) {
+admin.controller('DashboardCtrl', function($scope, ProductService, UserService, OrderService, $rootScope, $state) {
   ProductService.findAll().then(function(products) {
     $scope.productCount = products.length;
   });
@@ -21,7 +21,10 @@ admin.controller('DashboardCtrl', function($scope, ProductService, UserService, 
   OrderService.findPending().then(function(orders) {
     $scope.pendingCount = orders.length;
   });
-  $scope.completeOrder = function(id) {
-    return OrderService.completeOrder(id);
+  $rootScope.completeOrder = function(id) {
+    OrderService.completeOrder(id)
+      .then(function() {
+        $state.reload();
+      });
   }
 });
