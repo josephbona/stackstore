@@ -12,7 +12,7 @@
       <aside class="col-md-2 sidebar">
         <br>
         <div class="list-group">
-          <a ng-click="findAll()" class="list-group-item">All Products</a>        
+          <a ng-click="findAll()" class="list-group-item">All Products</a>
           <a ng-repeat="category in categories" ng-click="filterByCategory(category)" class="list-group-item">{{ category.name }}</a>
         </div>
 
@@ -24,7 +24,7 @@
         </div>
 
       </aside>
-      <div class="col-md-10">
+      <div class="col-md-10 product-archive-outer">
         <div class="section-header">
           <h1 class="title pull-left">{{ currentCategory }}</h1>
         </div>
