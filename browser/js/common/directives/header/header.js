@@ -34,10 +34,10 @@ app.directive('header', function($rootScope, AuthService, AUTH_EVENTS, $state, C
 
       $rootScope.$on('cartChange', function (event, Cart, StateChange){
         scope.lineItems =  Cart.line_items;
-        if (!StateChange){
-          $state.go('cart');
-        }
-         
+        // if (!StateChange){
+        //   $state.go('cart');
+        // }
+        
       }); 
 
       var setUser = function() {
