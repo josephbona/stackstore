@@ -7,6 +7,17 @@ admin.factory('OrderService', function($http) {
         }).catch(function(err) {
           console.log(err);
         });
+    },
+    findPending: function() {
+      return $http.get('/api/orders?status=pending')
+        .then(function(result) {
+          return result.data;
+        }).catch(function(err) {
+          console.log(err);
+        });
+    },
+    completeOrder: function(id) {
+      return $http.put('/api/orders/complete/' + id)
     }
   }
 });

@@ -7,6 +7,18 @@ admin.factory('UserService', function($http) {
         }).catch(function(err) {
           console.log(err);
         });
+    },
+    makeAdmin: function(id) {
+      return $http.put('/api/users/' + id, {role: 'admin'})
+        .catch(function(err) {
+          console.error(err);
+        })
+    },
+    removeAdmin: function(id) {
+      return $http.put('/api/users/' + id, {role: ''})
+        .catch(function(err) {
+          console.error(err);
+        })
     }
   }
 });
